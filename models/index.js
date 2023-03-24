@@ -1,6 +1,7 @@
 const User = require('./User');
-const parkingLot = require('./parkingLot');
-const parkingSpace = require('./parkingSpace');
+const ParkingLot = require('./ParkingLot');
+const ParkingSpace = require('./ParkingSpace');
+const Cars = require('./Cars')
 
 
-module.exports = { User, parkingLot, parkingSpace }
+module.exports = { User, ParkingLot, ParkingSpace,Cars }

@@ -9,11 +9,6 @@ const userSchema = new Schema(
         {
             type: String,
         },
-        license_plate:
-        {
-            type: String,
-            required: true,
-        },
         name:
         {
             type: String,
@@ -22,14 +17,6 @@ const userSchema = new Schema(
         {
             type: String,
         },
-        make_model:
-        {
-            type: String,
-        },
-        color:
-        {
-            type: String,
-        }
     },
     {
         toJSON: {
