@@ -20,7 +20,13 @@ const userSchema = new Schema(
         cars: [
             {
               type: Schema.Types.ObjectId,
-              ref: 'Cars',
+              ref: 'car',
+            },
+          ],
+          spaces: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: 'space',
             },
           ],
     },
@@ -32,4 +38,6 @@ const userSchema = new Schema(
     }
 );
 
-module.exports = userSchema;
+const User = model('user', userSchema);
+
+module.exports = User;

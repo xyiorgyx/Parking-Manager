@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-const parkingLotSchema = new Schema(
+const lotSchema = new Schema(
   {
-    parkingLotName: {
+    lotName: {
       type: String,
       required: true
     },
-    parkingSpaces: [
+    lotSpaces: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'ParkingSpaces',
+        ref: 'space',
       },
     ],
   },
@@ -21,4 +21,6 @@ const parkingLotSchema = new Schema(
   }
 );
 
-module.exports = parkingLotSchema;
+const Lot = model('lot', lotSchema);
+
+module.exports = Lot;

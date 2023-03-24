@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const parkingSpaceSchema = new Schema(
+const spaceSchema = new Schema(
     {
         spaceID:{
             type: String,
@@ -20,4 +20,6 @@ const parkingSpaceSchema = new Schema(
     }
 );
 
-module.exports = parkingSpaceSchema;
+const Space = model('space', spaceSchema);
+
+module.exports = Space;
