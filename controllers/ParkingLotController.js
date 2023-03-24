@@ -20,6 +20,8 @@ getParkingLots(req,res){
     ParkingLot.find()
     .then((parkingLots) => res.json(parkingLots))
     .catch((err) => res.status(500).json(err));
-}
+},
+
+updateLotSpaces()
 
 }
