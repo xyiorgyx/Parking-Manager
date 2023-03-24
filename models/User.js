@@ -17,6 +17,12 @@ const userSchema = new Schema(
         {
             type: String,
         },
+        cars: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: 'Cars',
+            },
+          ],
     },
     {
         toJSON: {
