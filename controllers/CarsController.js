@@ -1,6 +1,6 @@
-const { User, Cars } = require('../models');
+const { Cars } = require('../models');
 
-const carsController = {
+module.exports = {
   updateCars(req, res) {
     Cars.findOneAndUpdate(
       { _id: req.params.carsId },
@@ -30,4 +30,3 @@ const carsController = {
 };
 
 
-module.exports = carsController

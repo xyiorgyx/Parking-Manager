@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const carsSchema = new Schema({
+const carSchema = new Schema({
 
   license_plate: {
     type: String,
@@ -24,4 +24,7 @@ const carsSchema = new Schema({
 
 });
 
-module.exports = carsSchema;
+const Car = model('car', carSchema);
+
+module.exports = Car;
+

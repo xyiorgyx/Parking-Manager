@@ -1,6 +1,9 @@
-const { User, Cars } = require('../models');
+const { User, Car } = require('../models');
+const { populate } = require('../models/user');
 
-const userController = {
+
+module.exports = { 
+
     getUsers(req, res) {
         User.find()
             .then((users) => res.json(users))
@@ -11,7 +14,7 @@ const userController = {
         User.findOne({ _id: req.params.userId })
             .select('-__v')
             .populate('cars')
-            .populate('parkingLot')
+            .populate('spaces')
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No user with that ID' })
@@ -58,14 +61,46 @@ const userController = {
         .catch((err) => res.status(500).json(err));
     },
 
+    addUserSpaces(req,res) {
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            {$addToSet: {spaces:req.body}},
+            {runValidators:true, new:true}
+        )
+        .select('-__v')
+        .populate('spaces')
+        .then((user) => 
+        !user
+        ? res.status(404).json({ message: 'We were unable to find your account.'})
+        : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+
     deleteUserCars({params},res){
         User.findOneAndUpdate(
             {_id: params.userId},
-            {$pull: {cars:params.carsId}},
+            {$pull: {cars:params.carId}},
             {new:true}
         )
         .select('-__v')
         .populate('cars')
+        .then((user) => 
+        !user
+        ? res.status(404).json({ message: 'We were unable to find your account.'})
+        : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+
+    deleteUserSpacess({params},res){
+        User.findOneAndUpdate(
+            {_id: params.userId},
+            {$pull: {spaces:params.spaceId}},
+            {new:true}
+        )
+        .select('-__v')
+        .populate('spaces')
         .then((user) => 
         !user
         ? res.status(404).json({ message: 'We were unable to find your account.'})
@@ -88,4 +123,3 @@ const userController = {
     },
 };
 
-module.exports = userController
