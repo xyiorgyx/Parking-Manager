@@ -1,5 +1,5 @@
-const { ParkingLot, ParkingSpace } = require('../models');
-const { populate } = require('../models');
+const { ParkingLot, ParkingSpace } = require('../../models');
+const { populate } = require('../../models');
 
 
 module.exports = {
