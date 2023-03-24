@@ -6,6 +6,7 @@ const userController = {
             .then((users) => res.json(users))
             .catch((err) => res.status(500).json(err));
     },
+
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
             .select('-__v')
@@ -18,12 +19,13 @@ const userController = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // create a new user
+    
     createUser(req, res) {
         User.create(req.body)
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => res.status(500).json(err));
     },
+
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -39,7 +41,8 @@ const userController = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    updateUserCars(req,res) {
+
+    addUserCars(req,res) {
         User.findOneAndUpdate(
             {_id: req.params.userId},
             {$addToSet: {cars:req.body}},
@@ -54,6 +57,23 @@ const userController = {
         )
         .catch((err) => res.status(500).json(err));
     },
+
+    deleteUserCars({params},res){
+        User.findOneAndUpdate(
+            {_id: params.userId},
+            {$pull: {cars:params.carsId}},
+            {new:true}
+        )
+        .select('-__v')
+        .populate('cars')
+        .then((user) => 
+        !user
+        ? res.status(404).json({ message: 'We were unable to find your account.'})
+        : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
             .then((user) =>
