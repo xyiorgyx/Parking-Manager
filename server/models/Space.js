@@ -2,21 +2,20 @@ const { Schema, model } = require('mongoose');
 
 const spaceSchema = new Schema(
     {
-        spaceID:{
+        spaceName:{
             type: String,
             required: true
         },
         occupied: {
             type: Boolean,
+            default:false,
             required: true
-        }
-
+        },
     },
     {
         toJSON: {
             virtuals: true,
         },
-        id: false,
     }
 );
 

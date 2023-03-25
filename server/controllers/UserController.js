@@ -1,4 +1,4 @@
-const { User, Car } = require('../models');
+const { User, Car, Space } = require('../models');
 const { populate } = require('../models/user');
 
 
@@ -61,22 +61,6 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    addUserSpaces(req,res) {
-        User.findOneAndUpdate(
-            {_id: req.params.userId},
-            {$addToSet: {spaces:req.body}},
-            {runValidators:true, new:true}
-        )
-        .select('-__v')
-        .populate('spaces')
-        .then((user) => 
-        !user
-        ? res.status(404).json({ message: 'We were unable to find your account.'})
-        : res.json(user)
-        )
-        .catch((err) => res.status(500).json(err));
-    },
-
     deleteUserCars({params},res){
         User.findOneAndUpdate(
             {_id: params.userId},
@@ -93,20 +77,50 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    deleteUserSpacess({params},res){
-        User.findOneAndUpdate(
-            {_id: params.userId},
-            {$pull: {spaces:params.spaceId}},
-            {new:true}
-        )
-        .select('-__v')
-        .populate('spaces')
-        .then((user) => 
-        !user
-        ? res.status(404).json({ message: 'We were unable to find your account.'})
-        : res.json(user)
+    addUserSpaces(req,res) {
+        Space.findOneAndUpdate({_id: req.params.spaceId})
+        .then((space) =>
+        !space
+        ? res.status(404).json({ message: 'We were unable to find this space.'})
+        : Space.findOneAndUpdate(
+            { _id: req.params.spaceId },
+            {$set: { occupied: !occupied }},
+            { new:true }
+            )
+            .then((user) =>
+            !user
+            ? res.status(404).json({message: 'We were unable to find your account.'})
+            : User.findOneAndUpdate(
+                {_id:req.params.userId},
+                {$addToSet:{spaces:params.spaceId}},
+                {new:true}
+                )
+            )
         )
         .catch((err) => res.status(500).json(err));
+    },
+
+    deleteUserSpacess({params},res){
+        Space.findOneAndUpdate({_id: req.params.spaceId})
+        .then((space) =>
+        !space
+        ?res.status(404).json({ message: 'We were unable to find this space.'})
+        : Space.findOneAndUpdate(
+            {_id: req.params.spaceId},
+            {$set: {occupied: occupied }},
+            { new:true }
+        )
+        .then((user) => 
+        !user 
+        ?res.status(404).json({messgae: 'We were unable to find your account.'})
+        : User.findOneAndUpdate(
+            {_id:req.params.userId},
+            {$pull:{spaces:params.spaceId}},
+            {new:true}
+             )
+        )
+    )
+    .catch((err) => res.status(500).json(err));
     },
 
     deleteUser(req, res) {
