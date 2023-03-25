@@ -29,6 +29,9 @@ const userSchema = new Schema(
               ref: 'space',
             },
           ],
+          paid: {
+            type: Boolean
+        }
     },
     {
         toJSON: {
