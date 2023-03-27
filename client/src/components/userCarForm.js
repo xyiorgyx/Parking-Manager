@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {license_plate, make, model, color} from ""
 
-function Form() {
+function carForm() {
   // Here we set four state variables for carmodel, carmake,carlicense, and carcolor using `useState`
   const [model, setCarModel] = useState('');
   const [make, setCarMake] = useState('');
@@ -70,4 +70,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default carForm;
