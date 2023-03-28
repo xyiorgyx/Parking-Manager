@@ -1,4 +1,4 @@
-const { User, Car, Space } = require('../models');
+const { User, Car, Space, Lot} = require('../models');
 const { populate } = require('../models/user');
 const { unsubscribe } = require('./login');
 
