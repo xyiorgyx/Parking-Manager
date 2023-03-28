@@ -10,7 +10,7 @@ type User {
     cars: [Car]!
     spaces: [Space]!
     paid: Boolean
-},
+}
 
 type Car {
     _id: ID!
@@ -18,17 +18,17 @@ type Car {
     make:String!
     model:String!
     color:String!
-},
+}
 
 type Space {
     spaceName:String!
     occupied:Boolean!
-},
+}
 
 type Lot {
     lotName:String!
     lotSpaces:[Space]!
-},
+}
 
 type Auth {
     token: ID!
@@ -43,24 +43,21 @@ type Query {
     cars(username:String!):[Car]
     car(license_plate:String!):Car
     lot(lotName:String!):Lot
-}, 
+} 
 
-type Mutations{
+type Mutation {
     createUser(username: String!, email: String!, password: String!, phone_number:String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(email:String!): Auth
     deleteUser(userId:ID!): Auth
     addUserCar(license_plate:String!, make:String!, model:String!, color:String!): Car
     deleteUserCar(license_plate:String!, carId:ID!): Car
-    addUserSpace()
-    deleteUserSpace()
-    updateSpace(boolean)
-    updateLot()
-    updateCar()
+    addUserSpace(spaceName:String!, spaceId:ID!): User
+    deleteUserSpace(spaceName:String!, spaceId:ID!): User
+    updateSpace(spaceId:ID!): Space
+    updateLot(spaceId:ID!): Lot
+    updateCar(carId:ID!): User
   }
-
-}
-
-`
+`;
 
 module.exports = typeDefs;
