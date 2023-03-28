@@ -1,5 +1,6 @@
-const { User, Car, Space } = require('../models');
+const { User, Car, Space, Lot} = require('../models');
 const { populate } = require('../models/user');
+const { unsubscribe } = require('./login');
 
 
 module.exports = { 
@@ -27,6 +28,10 @@ module.exports = {
         User.create(req.body)
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => res.status(500).json(err));
+    },
+
+    loginUser(req,res) {
+        User.findOne({ })
     },
 
     updateUser(req, res) {
