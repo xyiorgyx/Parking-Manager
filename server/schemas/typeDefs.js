@@ -8,7 +8,6 @@ type User {
     username:String!
     phone_number:String!
     cars: [Car]!
-    spaces: [Space]!
     paid: Boolean
 }
 
@@ -18,6 +17,7 @@ type Car {
     make:String!
     model:String!
     color:String!
+    spaces: [Space]!
 }
 
 type Space {
@@ -41,19 +41,19 @@ type Query {
     user(username:String!):User
     me:User
     cars(username:String!):[Car]
-    car(license_plate:String!):Car
+    car(carId:ID!):Car
     lot(lotName:String!):Lot
 } 
 
 type Mutation {
     createUser(username: String!, email: String!, password: String!, phone_number:String!): Auth
     login(email: String!, password: String!): Auth
-    updateUser(email:String!): Auth
+    updateUser(userId: ID!): Auth
     deleteUser(userId:ID!): Auth
-    addUserCar(license_plate:String!, make:String!, model:String!, color:String!): Car
+    addUserCar(license_plate:String!): Car
     deleteUserCar(license_plate:String!, carId:ID!): Car
-    addUserSpace(spaceName:String!, spaceId:ID!): User
-    deleteUserSpace(spaceName:String!, spaceId:ID!): User
+    addCarSpace(carId:ID!, spaceName:String!): User
+    deleteCarSpace(spaceName:String!, spaceId:ID!): User
     updateSpace(spaceId:ID!): Space
     updateLot(spaceId:ID!): Lot
     updateCar(carId:ID!): User

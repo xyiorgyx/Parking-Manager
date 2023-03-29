@@ -21,6 +21,12 @@ const carSchema = new Schema({
     type: String,
     required: true
   },
+  spaces: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'space',
+    },
+  ],
 
 });
 
