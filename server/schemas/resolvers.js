@@ -61,7 +61,6 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
     deleteUser: async (parent, args, context) => {
       if (context.user) {
         const deletedUser = await User.findOneAndDelete(

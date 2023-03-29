@@ -51,7 +51,7 @@ type Mutation {
     createUser(username: String!, email: String!, password: String!, phone_number:String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(userId: ID!): Auth
-    userPayment(userId:ID!):Auth
+   
     deleteUser(userId:ID!): Auth
     addUserCar(license_plate:String!): Car
     deleteUserCar(license_plate:String!, carId:ID!): Car
