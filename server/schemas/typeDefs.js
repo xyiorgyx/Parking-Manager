@@ -21,6 +21,7 @@ type Car {
 }
 
 type Space {
+    _id:ID!
     spaceName:String!
     occupied:Boolean!
 }
@@ -52,11 +53,11 @@ type Mutation {
     deleteUser(userId:ID!): Auth
     addUserCar(license_plate:String!): Car
     deleteUserCar(license_plate:String!, carId:ID!): Car
-    addCarSpace(carId:ID!, spaceName:String!): User
-    deleteCarSpace(spaceName:String!, spaceId:ID!): User
-    updateSpace(spaceId:ID!): Space
-    updateLot(spaceId:ID!): Lot
-    updateCar(carId:ID!): User
+    updateUserCar(carId:ID!): User
+    addCarSpace(carId:ID!, spaceName:String!): Car
+    deleteCarSpace(spaceName:String!, carId:ID!): Car
+    occupySpace(spaceId:ID!, lotId: ID!): Space
+    vacateSpace(spaceId:ID!, lotId:ID!):Space
   }
 `;
 
