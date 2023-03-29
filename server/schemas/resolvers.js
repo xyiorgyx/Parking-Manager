@@ -62,7 +62,18 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    deleteUser: async (parent, { userId }, context) => {},
+    deleteUser: async (parent, args, context) => {
+      if (context.user) {
+        const deletedUser = await User.findOneAndDelete(
+          context.user._id,
+          args,
+          { new: true }
+        );
+
+        return deletedUser;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
 
     addUserCar: async (parent, { license_plate }, context) => {
       if (context.user) {
@@ -99,11 +110,10 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     updateUserCar: async (parent, args, context) => {
-        if(context.user) {
-            return await Car.findByIdAndUpdate(_id, args, {new:true})
-        }
-        throw new AuthenticationError('Not logged in');
-
+      if (context.user) {
+        return await Car.findByIdAndUpdate(_id, args, { new: true });
+      }
+      throw new AuthenticationError("Not logged in");
     },
 
     addCarSpace: async (parent, { carId, spaceName }, context) => {
