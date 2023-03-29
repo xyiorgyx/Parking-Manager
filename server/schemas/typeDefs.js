@@ -17,6 +17,7 @@ type Car {
     make:String!
     model:String!
     color:String!
+    owner:String!
     spaces: [Space]!
 }
 
