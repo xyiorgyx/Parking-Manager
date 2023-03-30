@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { license_plate, make, model, color } from "../../../server/schemas"
+import { license_plate, make, model, color } from "../../../../server/schemas"
 
 function carForm() {
   // Here we set four state variables for carmodel, carmake,carlicense, and carcolor using `useState`
