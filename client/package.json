@@ -2,11 +2,12 @@
   "name": "parking-manager",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^13.5.0",
-
+    "@apollo/client": "^3.3.5",
     "node": "^19.8.1",
     "qrcode.react": "^3.1.0",
     "react": "17.0.2",
@@ -15,8 +16,10 @@
     "autoprefixer": "^10.4.14",
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.2.7",
-
-    "web-vitals": "^2.1.4"
+    "graphql": "^15.4.0",
+    "web-vitals": "^2.1.4",
+    "react-router-dom": "^6.2.1",
+    "jwt-decode": "^2.2.0"
   },
   "scripts": {
     "build:css": "postcss src/index.css -o src/tailwind.css",
