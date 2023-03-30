@@ -6,8 +6,8 @@ type User {
     password:String!
     name:String!
     username:String!
-    phone_number:String!
-    cars: [Car]!
+    phoneNumber:String!
+    cars: [Car]
     paid: Boolean
 }
 
@@ -18,13 +18,13 @@ type Car {
     model:String!
     color:String!
     owner:String!
-    spaces: [Space]!
+    spaces: [Space]
 }
 
 type Space {
     _id:ID!
     spaceName:String!
-    occupied:Boolean!
+    occupied:Boolean
 }
 
 type Lot {
@@ -48,7 +48,7 @@ type Query {
 } 
 
 type Mutation {
-    createUser(username: String!, email: String!, password: String!, phone_number:String!): Auth
+    createUser(username: String!, email: String!, password: String!, phoneNumber:String!, name:String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(userId: ID!): Auth
    
