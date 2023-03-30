@@ -36,12 +36,6 @@ const userSchema = new Schema(
               ref: 'car',
             },
           ],
-          spaces: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'space',
-            },
-          ],
           paid: {
             type: Boolean
         }

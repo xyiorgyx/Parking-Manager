@@ -1,0 +1,58 @@
+[
+    {
+        "license_plate" : "526-h786",
+        "owner":"carluver",
+        "make":"toyota",
+        "model":"camry",
+        "color":"white"
+    },
+    {
+        "license_plate" : "798-hla7",
+        "owner":"carluver",
+        "make":"honda",
+        "model":"civic",
+        "color":"red"
+    },
+    {
+        "license_plate" : "264-jkwe",
+        "owner":"parqueen",
+        "make":"honda",
+        "model":"crv",
+        "color":"green"
+    },
+    {
+        "license_plate" : "497-aolk",
+        "owner":"parqueen",
+        "make":"toyota",
+        "model":"tacoma",
+        "color":"green"
+    },
+    {
+        "license_plate" : "hok3-ahg",
+        "owner":"killakarz",
+        "make":"mercedes",
+        "model":"c300",
+        "color":"silver"
+    },
+    {
+        "license_plate" : "hok3-uhh",
+        "owner":"killakarz",
+        "make":"subaru",
+        "model":"hatchback",
+        "color":"black"
+    },
+    {
+        "license_plate" : "478-tr33",
+        "owner":"sedanity",
+        "make":"BMW",
+        "model":"x4",
+        "color":"black"
+    },
+    {
+        "license_plate" : "car-time",
+        "owner":"sedanity",
+        "make":"BMW",
+        "model":"z4",
+        "color":"black"
+    }
+]
