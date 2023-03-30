@@ -44,25 +44,25 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-              <Route 
+              {/* <Route 
                 path="/" 
                 element={<Home />}
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/login" 
                 element={<Login />}
               />
               <Route 
                 path="/signup" 
                 element={<Signup />}
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/me" 
                 element={<Profile />}
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/profiles/:profileId"
-                element={<Profile />}
+                element={<Profile />} */}
               />
             </Routes>
           </div>

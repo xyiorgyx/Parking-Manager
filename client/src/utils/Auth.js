@@ -10,13 +10,23 @@ class AuthService {
     return token && !this.isTokenExpired(token) ? true : false;
   }
 
+  // isTokenExpired(token) {
+  //   const decoded = decode(token);
+  //   if (decoded.exp < Date.now() / 1000) {
+  //     localStorage.removeItem('id_token');
+  //     return true;
+  //   }
+  //   return false;
+  // }
   isTokenExpired(token) {
-    const decoded = decode(token);
-    if (decoded.exp < Date.now() / 1000) {
-      localStorage.removeItem('id_token');
-      return true;
+    try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
     }
-    return false;
   }
 
   getToken() {
