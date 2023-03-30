@@ -8,7 +8,7 @@ const resolvers = {
       return User.findOne({ username }).populate("cars");
     },
     users: async () => {
-      return User.find().populate("username");
+      return User.find();
     },
     car: async (parent, { carId }) => {
       return Car.findOne({ _id: carId });
@@ -29,8 +29,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    createUser: async (parent, { username, email, password, phoneNumber, name }) => {
+      const user = await User.create({ username, email, password, phoneNumber, name });
       const token = signToken(user);
       return { token, user };
     },

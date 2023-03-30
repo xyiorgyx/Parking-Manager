@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
@@ -19,7 +20,7 @@ const userSchema = new Schema(
             required:true
 
         },
-        phone_number:
+        phoneNumber:
         {
             type: String,
             required:true
@@ -47,6 +48,18 @@ const userSchema = new Schema(
         id: false,
     }
 );
+
+userSchema.pre('save', async function (next){
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+    next();
+})
+
+userSchema.methods.isCorrectPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};
 
 const User = model('user', userSchema);
 
