@@ -16,7 +16,8 @@ const lotSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-    }
+    },
+    
   }
 );
 

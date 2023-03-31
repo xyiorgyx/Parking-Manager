@@ -11,12 +11,11 @@ const spaceSchema = new Schema(
             default:false,
             required: true
         },
+        parkingLot: {
+            type:String,
+            required:true
+        }
     },
-    {
-        toJSON: {
-            virtuals: true,
-        },
-    }
 );
 
 const Space = model('space', spaceSchema);

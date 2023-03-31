@@ -23,14 +23,16 @@ type Car {
 }
 
 type Space {
-    _id:ID!
-    spaceName:String!
+    _id:ID
+    spaceName:String
     occupied:Boolean
+    parkingLot:String
 }
 
 type Lot {
-    lotName:String!
-    lotSpaces:[Space]!
+    _id: ID
+    lotName:String
+    lotSpaces:[Space]
 }
 
 type Auth {
@@ -45,7 +47,8 @@ type Query {
     me:User
     cars(username:String!):[Car]
     car(license_plate:String!):Car
-    lot:[Lot]
+    lot: [Lot]
+    spaces: [Space]
 } 
 
 type Mutation {

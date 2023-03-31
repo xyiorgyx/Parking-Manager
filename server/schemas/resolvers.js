@@ -24,8 +24,11 @@ const resolvers = {
       return Car.find(params);
     },*/
     lot: async () => {
-      return Lot.find().populate('lotSpaces');
+      return Lot.find().populate("lotSpaces");
     },
+    spaces: async() => {
+      return Space.find().populate('spaceName');
+    }
   },
 
   Mutation: {
