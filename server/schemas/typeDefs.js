@@ -45,7 +45,7 @@ type Query {
     me:User
     cars(username:String!):[Car]
     car(license_plate:String!):Car
-    lot(lotName:String!):Lot
+    lot:[Lot]
 } 
 
 type Mutation {
