@@ -24,7 +24,7 @@ function carForm() {
     alert(`Hello ${firstName} ${lastName}`);
     setCarModel('');
     setCarMake('');
-    setcarLicense('');
+    setCarLicensePlate('');
     setCarColor('');
   };
 
