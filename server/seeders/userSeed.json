@@ -3,7 +3,7 @@
         "username":"carluver",
         "password":"password01",
         "name": "James Franco",
-        "phone_number": "704-563-8945",
+        "phoneNumber": "704-563-8945",
         "email":"jamesfranco@gmail.com",
         "paid":false
     },
@@ -11,7 +11,7 @@
         "username":"parqueen",
         "password":"password02",
         "name": "Jennifer Lopez",
-        "phone_number": "704-365-5498",
+        "phoneNumber": "704-365-5498",
         "email":"jenniferlopez@gmail.com",
         "paid":false
     },
@@ -19,7 +19,7 @@
         "username":"killakarz",
         "password":"password03",
         "name": "Kevin Bacon",
-        "phone_number": "704-980-0089",
+        "phoneNumber": "704-980-0089",
         "email":"kevinbacon@gmail.com",
         "paid":false
     },
@@ -27,7 +27,7 @@
         "username":"sedanity",
         "password":"password04",
         "name": "Kristen Bell",
-        "phone_number": "704-278-4927",
+        "phoneNumber": "704-278-4927",
         "email":"kristenbell@gmail.com",
         "paid":false
     }

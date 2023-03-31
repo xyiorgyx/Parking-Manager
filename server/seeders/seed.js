@@ -1,7 +1,9 @@
 const db = require('../config/connection');
-const { User, Car} = require('../models');
+const { User, Car, Lot, Space} = require('../models');
 const userSeed = require('./userSeed');
 const carSeed = require('./carSeed.json');
+const lotSeed = require('./lotSeed.json');
+const spaceSeed = require('./spaceSeed.json');
 
 db.once('open', async () => {
   try {
@@ -28,4 +30,6 @@ db.once('open', async () => {
 
   console.log('all done!');
   process.exit(0);
+
+  
 });

@@ -8,10 +8,10 @@ const resolvers = {
       return User.findOne({ username }).populate("cars");
     },
     users: async () => {
-      return User.find();
+      return User.find().populate('cars');
     },
-    car: async (parent, { carId }) => {
-      return Car.findOne({ _id: carId });
+    car: async (parent, { license_plate }) => {
+      return Car.findOne({ license_plate });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -19,12 +19,12 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    cars: async (parent, { username }) => {
+    /*cars: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Car.find(params);
-    },
+    },*/
     lot: async () => {
-      return Lot.find().populate("lotName").popluate("lotSpaces");
+      return Lot.find().populate('lotSpaces');
     },
   },
 
@@ -54,7 +54,7 @@ const resolvers = {
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {
+        return await User.findOneAndUpdate(context.user._id, args, {
           new: true,
         });
       }
@@ -91,15 +91,10 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    deleteUserCar: async (parent, { carId }, context) => {
+    deleteUserCar: async (parent, { license_plate }, context) => {
       if (context.user) {
-        const car = await Car.findOneAndDelete({
-          _id: carId,
-          license_plate,
-          make,
-          model,
-          color,
-        });
+        const car = await Car.findOneAndDelete({license_plate });
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { cars: car._id } }
