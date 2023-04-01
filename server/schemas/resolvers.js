@@ -19,13 +19,16 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    /*cars: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Car.find(params);
-    },*/
-    lot: async () => {
-      return Lot.find().populate('lotSpaces');
+    cars: async () => {
+      //const params = username ? { username } : {};
+      return Car.find();
     },
+    lot: async () => {
+      return Lot.find().populate("spaces");
+    },
+    spaces: async() => {
+      return Space.find().populate('spaceName');
+    }
   },
 
   Mutation: {
@@ -54,11 +57,8 @@ const resolvers = {
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOneAndUpdate(context.user._id, args, {
-          new: true,
-        });
+        return await User.findByIdAndUpdate(context.user._id, args, {new: true});
       }
-
       throw new AuthenticationError("Not logged in");
     },
     deleteUser: async (parent, args, context) => {
@@ -74,102 +74,100 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addUserCar: async (parent, { license_plate }, context) => {
-      if (context.user) {
+    addUserCar: async (parent, {license_plate, make, model, color, owner, userId} ) => {
+      if (context.user) 
+      {
         const car = await Car.create({
-          _id,
           license_plate,
           make,
           model,
           color,
+          owner
         });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
+        await User.findByIdAndUpdate(
+          context.user._id,
           { $addToSet: { cars: car._id } }
         );
         return car;
-      }
+     }
       throw new AuthenticationError("You need to be logged in!");
     },
-    deleteUserCar: async (parent, { license_plate }, context) => {
+  
+    deleteUserCar: async (parent, {carId}, context) => {
       if (context.user) {
-        const car = await Car.findOneAndDelete({license_plate });
+      const car = await Car.findByIdAndDelete(carId);
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { cars: car._id } }
+       await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { cars: carId } },
+          {new:true}
         );
         return car;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateUserCar: async (parent, args, context) => {
+    updateUserCar: async (parent, {carId, license_plate, make, model, color}) => {
       if (context.user) {
-        return await Car.findByIdAndUpdate(_id, args, { new: true });
+        return await Car.findByIdAndUpdate(
+          carId, 
+          {
+            license_plate,
+            make,
+            model,
+            color,
+            owner
+          },
+          { new: true });
       }
       throw new AuthenticationError("Not logged in");
     },
 
-    addCarSpace: async (parent, { carId, spaceName }, context) => {
-      if (context.user) {
-        return Car.findOneAndUpdate(
+    addCarSpace: async (parent, { carId, spaceId, spaceName, parkingLot }) => {// context
+     // if (context.user) {
+        return await Car.findOneAndUpdate(
           { _id: carId },
           {
-            $addToSet: {
-              spaces: { spaceName },
+            $push: {
+              spaces: {_id:spaceId, spaceName, parkingLot},
             },
           },
-          { new: true, runValidators: true }
+          { new: true}
         );
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    deleteCarSpace: async (parent, { carId, spaceId }, context) => {
-      if (context.user) {
-        return Car.findOneAndUpdate(
+      },
+      //throw new AuthenticationError("You need to be logged in!");
+    
+    deleteCarSpace: async (parent, { carId, spaceId }) => { //context
+      //if (context.user) {
+        return await Car.findOneAndUpdate(
           { _id: carId },
-          {
-            $pull: {
-              spaces: { _id: spaceId },
-            },
-          },
+          {$pull: {spaces: { _id: spaceId }}},
           { new: true }
         );
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    occupySpace: async (parent, { spaceId, lotId }, context) => {
-      if (context.user) {
-        const occupiedSpace = Space.findOneAndUpdate(
-          { _id: spaceId },
+      },
+      //throw new AuthenticationError("You need to be logged in!");
+   
+    occupySpace: async (parent, { spaceId },context) => { 
+    if (context.user) {
+        return await Space.findOneAndUpdate(
+          { _id:spaceId},
           { $set: { occupied: true } },
           { new: true }
         );
-        await Lot.findOneAndUpdate(
-          { _id: lotId },
-          { $push: { lotSpaces: occupiedSpace } }
-        );
-        return occupiedSpace;
       }
       throw new AuthenticationError("Not logged in");
     },
-    vacateSpace: async (parent, { spaceId, lotId }, context) => {
+    vacateSpace: async (parent, { spaceId }, context) => { 
       if (context.user) {
-        const vacatedSpace = Space.findOneAndUpdate(
-          { _id: spaceId },
-          { $set: { occupied: false } },
-          { new: true }
-        );
-        await Lot.findOneAndUpdate(
-          { _id: lotId },
-          { $pull: { lotSpaces: vacatedSpace } }
-        );
-        return vacatedSpace;
-      }
+         return await Space.findOneAndUpdate(
+           { _id:spaceId},
+           { $set: { occupied: false } },
+           { new: true }
+         );
+    }
+    throw new AuthenticationError("Not logged in");
+  }
+}
+}
 
-      throw new AuthenticationError("Not logged in");
-    },
-  },
-};
 
 module.exports = resolvers;

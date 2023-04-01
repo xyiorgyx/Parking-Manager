@@ -25,16 +25,18 @@ const carSchema = new Schema({
     type: String,
     required: true
   },
-  spaces: [
+  spaces:[
     {
       type: Schema.Types.ObjectId,
-      ref: 'space',
+      ref: 'Space',
     },
   ],
+},
 
-});
 
-const Car = model('car', carSchema);
+);
+
+const Car = model('Car', carSchema);
 
 module.exports = Car;
 
