@@ -1,110 +1,163 @@
 [
     {
         "spaceName":"A1",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
     },
     {
         "spaceName":"A2",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A3",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A4",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A5",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },   
     {
         "spaceName":"A6",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A7",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A8",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"A9",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B1",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B2",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B3",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B4",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B5",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B6",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B7",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B8",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"B9",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C1",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C2",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C3",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C4",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C5",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C6",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C7",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C8",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     },
     {
         "spaceName":"C9",
-        "occupied":false
+        "occupied":false,
+        "parkingLot" :"Pete's Private Lot"
+
     }
 ]

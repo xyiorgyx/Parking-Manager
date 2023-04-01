@@ -4,32 +4,35 @@ const typeDefs = gql `
 type User {
     _id: ID!
     password:String!
-    name:String!
+    name:String
     username:String!
-    phoneNumber:String!
+    phoneNumber:String
     cars: [Car]
     paid: Boolean
+    email:String
 }
 
 type Car {
     _id: ID!
-    license_plate:String!
-    make:String!
-    model:String!
-    color:String!
-    owner:String!
+    license_plate:String
+    make:String
+    model:String
+    color:String
+    owner:String
     spaces: [Space]
 }
 
 type Space {
     _id:ID!
-    spaceName:String!
+    spaceName:String
     occupied:Boolean
+    parkingLot:String
 }
 
 type Lot {
-    lotName:String!
-    lotSpaces:[Space]!
+    _id: ID!
+    lotName:String
+    spaces:[Space]
 }
 
 type Auth {
@@ -42,24 +45,27 @@ type Query {
     users:[User]
     user(username:String!):User
     me:User
-    cars(username:String!):[Car]
-    car(carId:ID!):Car
-    lot(lotName:String!):Lot
+    car(license_plate:String!):Car
+    cars: [Car]
+    lot: [Lot]
+    spaces: [Space]
 } 
 
 type Mutation {
     createUser(username: String!, email: String!, password: String!, phoneNumber:String!, name:String!): Auth
     login(email: String!, password: String!): Auth
-    updateUser(userId: ID!): Auth
-   
+    updateUser(userId:ID!): Auth
     deleteUser(userId:ID!): Auth
-    addUserCar(license_plate:String!): Car
-    deleteUserCar(license_plate:String!, carId:ID!): Car
-    updateUserCar(carId:ID!): Car
-    addCarSpace(carId:ID!, spaceName:String!): Car
-    deleteCarSpace(spaceId:ID!, carId:ID!): Car
-    occupySpace(spaceId:ID!, lotId: ID!): Space
-    vacateSpace(spaceId:ID!, lotId:ID!):Space
+
+    addUserCar(license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
+    deleteUserCar(carId:ID!): Car
+    updateUserCar(carId:ID!,license_plate:String!, make:String!, model:String!, color:String!): Car
+
+    addCarSpace(carId:ID!, spaceId:ID!, spaceName:String!, parkingLot:String!): Car
+    deleteCarSpace(carId:ID!, spaceId:ID!): User
+
+    occupySpace(spaceId:ID!): Space
+    vacateSpace(spaceId:ID!):Space
   }
 `;
 

@@ -6,21 +6,17 @@ const lotSchema = new Schema(
       type: String,
       required: true
     },
-    lotSpaces: [
+    spaces: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'space',
+        ref: 'Space',
       },
     ],
+    
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
-  }
+ 
 );
 
-const Lot = model('lot', lotSchema);
+const Lot = model('Lot', lotSchema);
 
 module.exports = Lot;
