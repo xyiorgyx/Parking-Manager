@@ -18,6 +18,6 @@ const spaceSchema = new Schema(
     },
 );
 
-const Space = model('space', spaceSchema);
+const Space = model('Space', spaceSchema);
 
 module.exports = Space;

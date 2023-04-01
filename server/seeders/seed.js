@@ -12,6 +12,7 @@ db.once('open', async () => {
     await Space.deleteMany({});
     await User.create(userSeed);
     await Lot.create(lotSeed);
+    await Car.create(carSeed);
     
 
 

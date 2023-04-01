@@ -5,13 +5,15 @@ const userSchema = new Schema(
     {
         username: {
             type: String,
-            required:true
+            required:true,
+            unique:true
 
         },
         password:
         {
             type: String,
-            required:true
+            required:true,
+            unique:true
 
         },
         name:
@@ -29,14 +31,17 @@ const userSchema = new Schema(
         email:
         {
             type:String,
-            required:true
+            required:true,
+            unique:true
         },
-        cars: [
-            {
+        cars: 
+            [
+                {
               type: Schema.Types.ObjectId,
-              ref: 'car',
+              ref: 'Car',
             },
-          ],
+        ],
+          
           paid: {
             type: Boolean
         }
@@ -45,7 +50,7 @@ const userSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
-        id: false,
+        id: true,
     }
 );
 
@@ -61,6 +66,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

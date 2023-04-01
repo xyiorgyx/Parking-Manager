@@ -14,25 +14,25 @@ type User {
 
 type Car {
     _id: ID!
-    license_plate:String!
-    make:String!
-    model:String!
-    color:String!
-    owner:String!
+    license_plate:String
+    make:String
+    model:String
+    color:String
+    owner:String
     spaces: [Space]
 }
 
 type Space {
-    _id:ID
+    _id:ID!
     spaceName:String
     occupied:Boolean
     parkingLot:String
 }
 
 type Lot {
-    _id: ID
+    _id: ID!
     lotName:String
-    lotSpaces:[Space]
+    spaces:[Space]
 }
 
 type Auth {
@@ -45,8 +45,8 @@ type Query {
     users:[User]
     user(username:String!):User
     me:User
-    cars(username:String!):[Car]
     car(license_plate:String!):Car
+    cars: [Car]
     lot: [Lot]
     spaces: [Space]
 } 
@@ -57,15 +57,15 @@ type Mutation {
     updateUser(userId:ID!): Auth
     deleteUser(userId:ID!): Auth
 
-    addUserCar(license_plate:String!): Car
-    deleteUserCar(license_plate:String!): Car
+    addUserCar(userId:ID!,license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
+    deleteUserCar(userId:ID!, carId:ID!): Car
     updateUserCar(license_plate:String!): Car
 
-    addCarSpace(license_plate:String!, spaceName:String!): Car
-    deleteCarSpace(spaceName:String!, license_plate:String!): Car
+    addCarSpace(carId:ID!, spaceId:ID!, spaceName:String!, parkingLot:String!): Car
+    deleteCarSpace(carId:ID!, spaceId:ID!): User
 
-    occupySpace(spaceName:String!, lotName:String!): Space
-    vacateSpace(spaceName:String!, lotName:String!):Space
+    occupySpace(spaceId:ID!): Space
+    vacateSpace(spaceId:ID!):Space
   }
 `;
 
