@@ -57,9 +57,9 @@ type Mutation {
     updateUser(userId:ID!): Auth
     deleteUser(userId:ID!): Auth
 
-    addUserCar(userId:ID!,license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
-    deleteUserCar(userId:ID!, carId:ID!): Car
-    updateUserCar(license_plate:String!): Car
+    addUserCar(license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
+    deleteUserCar(carId:ID!): Car
+    updateUserCar(carId:ID!,license_plate:String!, make:String!, model:String!, color:String!): Car
 
     addCarSpace(carId:ID!, spaceId:ID!, spaceName:String!, parkingLot:String!): Car
     deleteCarSpace(carId:ID!, spaceId:ID!): User

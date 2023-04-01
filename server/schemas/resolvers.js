@@ -109,9 +109,18 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateUserCar: async (parent, args, context) => {
+    updateUserCar: async (parent, {carId, license_plate, make, model, color}) => {
       if (context.user) {
-        return await Car.findByIdAndUpdate(_id, args, { new: true });
+        return await Car.findByIdAndUpdate(
+          carId, 
+          {
+            license_plate,
+            make,
+            model,
+            color,
+            owner
+          },
+          { new: true });
       }
       throw new AuthenticationError("Not logged in");
     },
