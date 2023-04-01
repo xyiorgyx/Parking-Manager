@@ -57,11 +57,8 @@ const resolvers = {
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOneAndUpdate(context.user._id, args, {
-          new: true,
-        });
+        return await User.findByIdAndUpdate(context.user._id, args, {new: true});
       }
-
       throw new AuthenticationError("Not logged in");
     },
     deleteUser: async (parent, args, context) => {
