@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
-import { ADD_PROFILE } from '../utils/mutations';
+import { CREATE_USER } from '../utils/mutations';
 
-import Auth from '../utils/auth';
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
+
+import Auth from '../utils/Auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -12,7 +20,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
-  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
+  const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -30,65 +38,79 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data } = await addProfile({
+      const { data } = await createUser({
         variables: { ...formState },
       });
 
-      Auth.login(data.addProfile.token);
+      Auth.login(data.createUser.token);
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
+    <main className="">
+      <div className="">
+        <div className="">
+          <h4 className="">Sign Up</h4>
+          <div className="">
             {data ? (
               <p>
                 Success! You may now head{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="name"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
+              <Card color="transparent" shadow={false}>
+              <Typography variant="h4" color="blue-gray">
+                Sign Up
+              </Typography>
+              <Typography color="gray" className="mt-1 font-normal">
+                Enter your details to register.
+              </Typography>
+              <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                <div className="mb-4 flex flex-col gap-6">
+                  <Input size="lg" label="Name" />
+                  <Input size="lg" label="Email" />
+                  <Input type="password" size="lg" label="Password" />
+                </div>
+                <Checkbox
+                  label={
+                    (
+                      <Typography
+                        variant="small"
+                        color="gray"
+                        className="flex items-center font-normal"
+                      >
+                        I agree the
+                        <a
+                          href="#"
+                          className="font-medium transition-colors hover:text-blue-500"
+                        >
+                          &nbsp;Terms and Conditions
+                        </a>
+                      </Typography>
+                    )
+                  }
+                  containerProps={{ className: "-ml-2.5" }}
                 />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
+                <Button className="mt-6" fullWidth>
+                  Register
+                </Button>
+                <Typography color="gray" className="mt-4 text-center font-normal">
+                  Already have an account?{" "}
+                  <a
+                    href="#"
+                    className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+                  >
+                    Sign In
+                  </a>
+                </Typography>
               </form>
+            </Card>
             )}
 
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
+              <div className="my-3 p-3 bg-danger text-gray-700">
                 {error.message}
               </div>
             )}
