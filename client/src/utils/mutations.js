@@ -31,11 +31,11 @@ mutation addUserCar($license_plate: String!, $make: String!, $model: String!, $c
     addUserCar(license_plate: $license_plate, make: $make, model: $model, color: $color) {
         token
         user {
-            _id: ID!
-            license_plate:String!
-            make:String!
-            model:String!
-            color:String!
+            _id
+            license_plate
+            make
+            model
+            color
         }
     }
 }
@@ -46,11 +46,11 @@ mutation deleteUserCar($license_plate: String!, $make: String!, $model: String!,
   deleteUserCar(license_plate: $license_plate, make: $make, model: $model, color: $color) {
         token
         user {
-            _id: ID!
-            license_plate:String!
-            make:String!
-            model:String!
-            color:String!
+            _id
+            license_plate
+            make
+            model
+            color
         }
     }
 }
@@ -61,11 +61,11 @@ mutation occupySpace($license_plate: String!, $spaceName: String!, $make: String
   deleteUserCar(license_plate: $license_plate, spaceName: $spaceName, make: $make, model: $model, color: $color) {
         token
         user {
-            _id: ID!
-            license_plate:String!
-            spaceName:String!
-            model:String!
-            color:String!
+            _id
+            license_plate
+            spaceName
+            model
+            color
         }
     }
 }
@@ -76,11 +76,11 @@ mutation vacateSpace($license_plate: String!, $spaceName: String!, $make: String
   vacateSpace(license_plate: $license_plate, spaceName: $spaceName, make: $make, model: $model, color: $color) {
         token
         user {
-            _id: ID!
-            license_plate:String!
-            spaceName:String!
-            model:String!
-            color:String!
+            _id
+            license_plate
+            spaceName
+            model
+            color
         }
     }
 }

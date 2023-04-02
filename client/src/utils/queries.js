@@ -44,7 +44,6 @@ export const QUERY_LOT = gql`
             spaceName
         }
     }
-  }
 `;
 
 export const QUERY_ME = gql`
