@@ -28,7 +28,7 @@ const resolvers = {
     },
     spaces: async() => {
       return Space.find().populate('spaceName');
-    }
+    },
   },
 
   Mutation: {
