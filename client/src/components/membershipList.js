@@ -47,9 +47,9 @@ export default function MembersList() {
                                 <td class="px-6 py-4">
                                     {user.email}
                                 </td>
-                                <td class="px-6 py-4 text-green-500">
-                                    {user.paid}
-                                </td>
+                                {user.paid= true ?
+                                ( <td class="px-6 py-4 text-green-500"> PAID </td>):(
+                                <td class="px-6 py-4 text-orange-600">NOT PAID </td>) }
                             </tr>)
                         })}
 
