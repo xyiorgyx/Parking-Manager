@@ -5,35 +5,33 @@ import { QUERY_USER } from '../utils/queries';
 import { Navigate, useParams } from 'react-router-dom';
 
 function UserProfilePage() {
-  useEffect(() => {
-    if (Auth.loggedIn()) {
-      const userProfile = Auth.getProfile();
-      setUser(userProfile);
-    } else {
-      window.location.href = '/login';
-    }
-  }, []);
-  const { username } = useParams();
-  const { loading, error, data } = useQuery(QUERY_USER, {
-    variables: { username },
-  });
-  console.log(error);
-  const [user, setUser] = useState({});
-  const profile = data?.me || data?.profile || {};
-  
+  const { loading, data } = useQuery(QUERY_USER)
+
+  const userData = data?.user || {}
+
+  // useEffect(() => {
+  //   if (Auth.loggedIn()) {
+  //     const userProfile = Auth.getProfile();
+  //     setUser(userProfile);
+  //   } else {
+  //     window.location.href = '/login';
+  //   }
+  // }, []);
+
+
+
+
 
 
   if (loading) return <p>Loading...</p>;
-  if(data){
-    user=data.user;
-  }
+
 
   return (
     <div>
-      {user ? (
+      {userData ? (
         <div>
-          <h1>Welcome {user?.name}!</h1>
-          <p>Email: {user?.email}</p>
+          <h1>Welcome {userData.username}!</h1>
+          <p>Email: {userData.email}</p>
           {/* Display other user details here */}
         </div>
       ) : (
