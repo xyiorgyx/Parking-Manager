@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Link } from 'react-router-dom';
 import { ADD_USER_CAR } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
-import { Auth } from "../../utils/Auth";
+import Auth from "../../utils/Auth";
 
 function carForm() {
 
