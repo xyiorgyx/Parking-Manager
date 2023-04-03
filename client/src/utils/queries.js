@@ -62,3 +62,24 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_USERS = gql`
+query users{
+  users {
+    _id
+    password
+    name
+    username
+    phoneNumber
+    paid
+    email
+    cars {
+      _id
+      license_plate
+      make
+      model
+      color
+    }
+  }
+}
+`
