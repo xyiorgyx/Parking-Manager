@@ -8,80 +8,89 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
       }
     }
   }
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
+  mutation addUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $phoneNumber: String!
+    $name: String!
+  ) {
+    addUser(
+      username: $username
+      email: $email
+      password: $password
+      phoneNumber: $phoneNumber
+      name: $name
+    ) {
       token
       user {
         _id
-        username
       }
     }
   }
 `;
 
 export const ADD_USER_CAR = gql`
-mutation addUserCar($license_plate: String!, $make: String!, $model: String!, $color: String!) {
-    addUserCar(license_plate: $license_plate, make: $make, model: $model, color: $color) {
-        token
-        user {
-            _id
-            license_plate
-            make
-            model
-            color
-        }
+  mutation addUserCar(
+    $license_plate: String!
+    $make: String!
+    $model: String!
+    $color: String!
+    $owner: String!
+  ) {
+    addUserCar(
+      license_plate: $license_plate
+      make: $make
+      model: $model
+      color: $color
+      owner: $owner
+    ) {
+      _id
+      license_plate
+      make
+      model
+      color
+      owner
     }
-}
+  }
 `;
 
 export const DELETE_USER_CAR = gql`
-mutation deleteUserCar($license_plate: String!, $make: String!, $model: String!, $color: String!) {
-  deleteUserCar(license_plate: $license_plate, make: $make, model: $model, color: $color) {
-        token
-        user {
-            _id
-            license_plate
-            make
-            model
-            color
-        }
+  mutation deleteUserCar($carId: ID!) {
+    deleteUserCar(carId: $carId) {
+      _id
+      license_plate
+      make
+      model
+      color
     }
-}
+  }
 `;
 
 export const OCCUPY_SPACE = gql`
-mutation occupySpace($license_plate: String!, $spaceName: String!, $make: String!, $model: String!, $color: String!) {
-  deleteUserCar(license_plate: $license_plate, spaceName: $spaceName, make: $make, model: $model, color: $color) {
-        token
-        user {
-            _id
-            license_plate
-            spaceName
-            model
-            color
-        }
+  mutation occupySpace($spaceId: ID!, $license_plate: String!) {
+    occupySpace(spaceId: $spaceId, license_plate: $license_plate) {
+      _id
+      spaceName
+      occupied
+      parkingLot
     }
-}
+  }
 `;
 
 export const VACATE_SPACE = gql`
-mutation vacateSpace($license_plate: String!, $spaceName: String!, $make: String!, $model: String!, $color: String!) {
-  vacateSpace(license_plate: $license_plate, spaceName: $spaceName, make: $make, model: $model, color: $color) {
-        token
-        user {
-            _id
-            license_plate
-            spaceName
-            model
-            color
-        }
+  mutation vacateSpace($spaceId: ID!) {
+    vacateSpace(spaceId: $spaceId) {
+      _id
+      spaceName
+      occupied
+      parkingLot
     }
-}
+  }
 `;
