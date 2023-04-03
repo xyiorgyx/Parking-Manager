@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_CAR } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
-import { Auth } from '../../utils/Auth';
+import Auth  from '../../utils/Auth';
 
-function carForm() {
+function CarForm() {
   // Here we set four state variables for carmodel, carmake,carlicense, and carcolor using `useState`
   const [formState, setFormState] = useState({
     license_plate: '',
@@ -12,7 +13,7 @@ function carForm() {
     model:'',
     color:''
   });
-  const [owner, setOwner] = useState('');
+
 
   const [addUserCar, {error}] = useMutation(ADD_USER_CAR, {
     update(cache, {data: {addUserCar} }) {
@@ -37,18 +38,19 @@ function carForm() {
       const { data } = await addUserCar ({
         variables: { 
           ...formState,
-        owner: Auth.getProfile().data.username,
+        owner: Auth.getProfile(data.username)
        },
       });
 
       setFormState({
+        ...formState,
       license_plate: '',
       make:'',
       model:'',
       color:''
       });
-      setOwner('');
-
+      
+      window.location.replace("/me");
     } catch (err) {
       console.error(err);
     }
@@ -57,39 +59,70 @@ function carForm() {
     const { name, value } = event.target;
 
     setFormState({ ...formState, [name]:value });
-    setOwner({ value });
+   
    };
   
 
   return (
     <>
-   
-<form class="m-10 w-1/2 bg-transparent">
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 w-full mb-6 group">
-          <input 
-          type="text" name="floating_Car_Model" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Model</label>
+    
+      <form onSubmit={handleFormSubmit} action="#" className=" max-w-lg flex flex-col mx-auto md:h-screen lg:py-0 p-6">
+        <h2 className='p-6 text-white'>Vehicle Information</h2>
+        <div className=' border p-6'>
+        <div className=''>
+          <div className="w-full md:w-1/2 px-4 mb-2 md:mb-0">
+            <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" >
+              Car Model
+            </label>
+            <input
+              value={formState.model}
+              name="carModel"
+              onChange={handleChange}
+              type="text"
+              placeholder="Car Model"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" />
+          </div>
+        </div>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3" >
+          Car Make
+        </label>
+        <input value={formState.make}
+          name="carMake"
+          onChange={handleChange}
+          type="text"
+          placeholder="Car Make"
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
       </div>
-      <div class="relative z-0 w-full mb-6 group">
-          <input type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Make</label>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3" >
+          Car Color
+        </label>
+
+        <input value={formState.color}
+          name="carColor"
+          onChange={handleChange}
+          type="text" placeholder="Car Color"
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
       </div>
-    </div>
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 w-full mb-6 group">
-          <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Color</label>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3" >
+          License Number
+        </label>
+        <input value={formState.license_plate} name="carLicense" onChange={handleChange} type="text" placeholder="Car License"
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
       </div>
-      <div class="relative z-0 w-full mb-6 group">
-          <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car License Plate</label>
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 p-6">
+        <button type="submit"  placeholder="Car License"
+          className="appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+           Submit
+            </button>
       </div>
-    </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-  </form>
+      </div>
+    
+    </form>
     </>
   );
-};
+}
 
-export default carForm;
+export default CarForm;
