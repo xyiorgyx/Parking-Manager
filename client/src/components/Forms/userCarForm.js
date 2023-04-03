@@ -5,7 +5,7 @@ import { ADD_USER_CAR } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import Auth from "../../utils/Auth";
 
-function carForm() {
+function CarForm() {
 
   const [formState, setFormState] = useState({
     license_plate: "",
@@ -42,11 +42,13 @@ function carForm() {
       });
 
       setFormState({
+        ...formState,
         license_plate: "",
         make: "",
         model: "",
         color: "",
       });
+      window.location.replace();
     } catch (err) {
       console.error(err);
     }
@@ -55,7 +57,6 @@ function carForm() {
     const { name, value } = event.target;
 
     setFormState({ ...formState, [name]: value });
-    setOwner({ value });
   };
 
   return (
@@ -74,7 +75,7 @@ function carForm() {
               value={formState.make}
             />
             <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              {" "}
+    
               Make
             </label>
           </div>
@@ -153,4 +154,4 @@ function carForm() {
   );
 };
 
-export default carForm;
+export default CarForm;
