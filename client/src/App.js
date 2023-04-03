@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CarForm from './components/Forms/userCarForm';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,9 +41,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="container  mx-auto text-center lg:px-40">
+        <div>
           <Header />
-          <div className="container">
+          <div className="flex-column justify-flex-start min-100-vh">
+            
             <Routes>
               <Route 
                 path="/" 
@@ -60,13 +62,17 @@ function App() {
                 path="/me" 
                 element={<Profile />}
               />
+                <Route 
+                path="/carForm" 
+                element={<CarForm/>}
+              />
               <Route 
                 path="/profiles/:profileId"
                 element={<Profile />}
               />
             </Routes>
           </div>
-          <Footer />
+          <Footer className="fixed inset-x-0 bottom-0" />
         </div>
       </Router>
     </ApolloProvider>
