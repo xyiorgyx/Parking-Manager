@@ -42,19 +42,21 @@ const Login = (props) => {
 
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-8 h-8 mr-2" src="https://seeklogo.com/images/T/traffic-signs-logo-7823141A70-seeklogo.com.png" alt="logo" />
-            Parking Manager
-        </a>
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex flex-col items-center justify-center  mx-auto md:h-screen lg:py-0">
+    {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+        <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0  dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
                 </h1>
-                <form onlick={handleFormSubmit} class="space-y-4 md:space-y-6" action="#">
+                <form onSubmit={handleFormSubmit} className="space-y-4 md:space-y-6" action="#">
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                        <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                         <input
                             type="email"
                             name="email"
@@ -84,22 +86,20 @@ const Login = (props) => {
                                 <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                             </div>
                         </div>
-                        <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                       
                     </div>
-                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"><Link to="/">Sign in</Link></button>
+                    {error ? (
+                      <div>
+                        <p className="error-text">The provided credentials are incorrect</p>
+                      </div>
+                    ) : null}
+                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Don't have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                        Don't have an account yet? <Link to="/signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                     </p>
                 </form>
-
-
-                {error && (
-                    <div className="my-3 p-3 bg-danger text-white">
-                        {error.message}
-                    </div>
-                )}
             </div>
-        </div>
+        </div>)}
     </div>
 </section>
   );

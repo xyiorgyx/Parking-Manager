@@ -1,13 +1,13 @@
 import React from "react";
-// import Header from "../components/Header";
-import Footer from "../components/Footer";
+
+import Login from "../pages/Login"
 
 function Home() {
   return (
     <main>
-      <div className="flex-row justify-center">
-        <div className="col-12 col-md-10 my-3">
-       <Footer />
+      <div className="bg-auto">
+        <div className="w-full">
+        <Login/>
         </div>
       </div>
     </main>
