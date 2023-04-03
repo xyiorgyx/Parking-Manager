@@ -4,29 +4,27 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("cars");
-    },
-    users: async () => {
-      return User.find().populate('cars');
-    },
-    car: async (parent, { license_plate }) => {
-      return Car.findOne({ license_plate });
-    },
-    me: async (parent, args, context) => {
-      if (context.auth) {
-        return User.findOne({ _id: context.auth._id }).populate("cars");
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).populate("cars");
+        return userData
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('not logged in!')
     },
-    cars: async () => {
-      //const params = username ? { username } : {};
-      return Car.find();
-    },
+    // users: async () => {
+    //   return User.find().populate('cars');
+    // },
+    // car: async (parent, { license_plate }) => {
+    //   return Car.findOne({ license_plate });
+    // },
+    // cars: async () => {
+    //   //const params = username ? { username } : {};
+    //   return Car.find();
+    // },
     lot: async () => {
       return Lot.find().populate("spaces");
     },
-    spaces: async() => {
+    spaces: async () => {
       return Space.find().populate('spaceName');
     },
   },
@@ -56,15 +54,15 @@ const resolvers = {
     },
 
     updateUser: async (parent, args, context) => {
-      if (context.auth) {
-        return await User.findByIdAndUpdate(context.auth._id, args, {new: true});
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
       throw new AuthenticationError("Not logged in");
     },
     deleteUser: async (parent, args, context) => {
-      if (context.auth) {
+      if (context.user) {
         const deletedUser = await User.findOneAndDelete(
-          context.auth._id,
+          context.user._id,
           args,
           { new: true }
         );
@@ -74,9 +72,8 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addUserCar: async (parent, {license_plate, make, model, color, owner, userId}, context) => {
-      if (context.auth) 
-      {
+    addUserCar: async (parent, { license_plate, make, model, color, owner, userId }, context) => {
+      if (context.user) {
         const car = await Car.create({
           license_plate,
           make,
@@ -85,31 +82,31 @@ const resolvers = {
           owner
         });
         await User.findByIdAndUpdate(
-          context.auth._id,
+          context.user._id,
           { $addToSet: { cars: car._id } }
-        );
-        return car;
-     }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-  
-    deleteUserCar: async (parent, {carId}, context) => {
-      if (context.auth) {
-      const car = await Car.findByIdAndDelete(carId);
-
-       await User.findByIdAndUpdate(
-          context.auth._id,
-          { $pull: { cars: carId } },
-          {new:true}
         );
         return car;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateUserCar: async (parent, {carId, license_plate, make, model, color}, context) => {
-      if (context.auth) {
+
+    deleteUserCar: async (parent, { carId }, context) => {
+      if (context.user) {
+        const car = await Car.findByIdAndDelete(carId);
+
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { cars: carId } },
+          { new: true }
+        );
+        return car;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    updateUserCar: async (parent, { carId, license_plate, make, model, color }, context) => {
+      if (context.user) {
         return await Car.findByIdAndUpdate(
-          carId, 
+          carId,
           {
             license_plate,
             make,
@@ -123,50 +120,50 @@ const resolvers = {
     },
 
     addCarSpace: async (parent, { carId, spaceId, spaceName, parkingLot }) => {// context
-     // if (context.user) {
-        return await Car.findOneAndUpdate(
-          { _id: carId },
-          {
-            $push: {
-              spaces: {_id:spaceId, spaceName, parkingLot},
-            },
+      // if (context.user) {
+      return await Car.findOneAndUpdate(
+        { _id: carId },
+        {
+          $push: {
+            spaces: { _id: spaceId, spaceName, parkingLot },
           },
-          { new: true}
-        );
-      },
-      //throw new AuthenticationError("You need to be logged in!");
-    
+        },
+        { new: true }
+      );
+    },
+    //throw new AuthenticationError("You need to be logged in!");
+
     deleteCarSpace: async (parent, { carId, spaceId }) => { //context
       //if (context.user) {
-        return await Car.findOneAndUpdate(
-          { _id: carId },
-          {$pull: {spaces: { _id: spaceId }}},
-          { new: true }
-        );
-      },
-      //throw new AuthenticationError("You need to be logged in!");
-   
-    occupySpace: async (parent, { spaceId },context) => { 
-    if (context.user) {
+      return await Car.findOneAndUpdate(
+        { _id: carId },
+        { $pull: { spaces: { _id: spaceId } } },
+        { new: true }
+      );
+    },
+    //throw new AuthenticationError("You need to be logged in!");
+
+    occupySpace: async (parent, { spaceId }, context) => {
+      if (context.user) {
         return await Space.findOneAndUpdate(
-          { _id:spaceId},
+          { _id: spaceId },
           { $set: { occupied: true } },
           { new: true }
         );
       }
       throw new AuthenticationError("Not logged in");
     },
-    vacateSpace: async (parent, { spaceId }, context) => { 
+    vacateSpace: async (parent, { spaceId }, context) => {
       if (context.user) {
-         return await Space.findOneAndUpdate(
-           { _id:spaceId},
-           { $set: { occupied: false } },
-           { new: true }
-         );
+        return await Space.findOneAndUpdate(
+          { _id: spaceId },
+          { $set: { occupied: false } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("Not logged in");
     }
-    throw new AuthenticationError("Not logged in");
   }
-}
 }
 
 
