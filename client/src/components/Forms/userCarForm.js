@@ -1,25 +1,65 @@
 import React, { useState } from 'react';
-import { license_plate, make, model, color } from "../../../../server/schemas"
+import { useMutation } from '@apollo/client';
+import { ADD_USER_CAR } from '../../utils/mutations';
+import { QUERY_USER } from '../../utils/queries';
+import { Auth } from '../../utils/Auth';
 
 function carForm() {
   // Here we set four state variables for carmodel, carmake,carlicense, and carcolor using `useState`
-  const [model, setCarModel] = useState('');
-  const [make, setCarMake] = useState('');
-  const [license_plate, setCarLicensePlate] = useState('');
-  const [color, setCarColor] = useState('');
+  const [formState, setFormState] = useState({
+    license_plate: '',
+    make:'',
+    model:'',
+    color:''
+  });
+  const [owner, setOwner] = useState('');
 
+  const [addUserCar, {error}] = useMutation(ADD_USER_CAR, {
+    update(cache, {data: {addUserCar} }) {
+      try{
+        const { newCar } = cache.readQuery({
+          query: QUERY_USER
+        });
+        cache.writeQuery({
+          query: QUERY_USER,
+          data: { user: {cars: [addUserCar, ...newCar]}},
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
 
-
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-   
-    setCarModel('');
-    setCarMake('');
-    setCarLicensePlate('');
-    setCarColor('');
+    try {
+      const { data } = await addUserCar ({
+        variables: { 
+          ...formState,
+        owner: Auth.getProfile().data.username,
+       },
+      });
+
+      setFormState({
+      license_plate: '',
+      make:'',
+      model:'',
+      color:''
+      });
+      setOwner('');
+
+    } catch (err) {
+      console.error(err);
+    }
   };
+   const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({ ...formState, [name]:value });
+    setOwner({ value });
+   };
+  
 
   return (
     <>
@@ -50,6 +90,6 @@ function carForm() {
   </form>
     </>
   );
-}
+};
 
 export default carForm;
