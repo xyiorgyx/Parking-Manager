@@ -14,8 +14,8 @@ const resolvers = {
       return Car.findOne({ license_plate });
     },
     me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("cars");
+      if (context.auth) {
+        return User.findOne({ _id: context.auth._id }).populate("cars");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -32,8 +32,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password, phoneNumber, name }) => {
-      const user = await User.create({ username, email, password, phoneNumber, name });
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
@@ -56,15 +56,15 @@ const resolvers = {
     },
 
     updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {new: true});
+      if (context.auth) {
+        return await User.findByIdAndUpdate(context.auth._id, args, {new: true});
       }
       throw new AuthenticationError("Not logged in");
     },
     deleteUser: async (parent, args, context) => {
-      if (context.user) {
+      if (context.auth) {
         const deletedUser = await User.findOneAndDelete(
-          context.user._id,
+          context.auth._id,
           args,
           { new: true }
         );
@@ -74,8 +74,8 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addUserCar: async (parent, {license_plate, make, model, color, owner, userId} ) => {
-      if (context.user) 
+    addUserCar: async (parent, {license_plate, make, model, color, owner, userId}, context) => {
+      if (context.auth) 
       {
         const car = await Car.create({
           license_plate,
@@ -85,7 +85,7 @@ const resolvers = {
           owner
         });
         await User.findByIdAndUpdate(
-          context.user._id,
+          context.auth._id,
           { $addToSet: { cars: car._id } }
         );
         return car;
@@ -94,11 +94,11 @@ const resolvers = {
     },
   
     deleteUserCar: async (parent, {carId}, context) => {
-      if (context.user) {
+      if (context.auth) {
       const car = await Car.findByIdAndDelete(carId);
 
        await User.findByIdAndUpdate(
-          context.user._id,
+          context.auth._id,
           { $pull: { cars: carId } },
           {new:true}
         );
@@ -106,8 +106,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateUserCar: async (parent, {carId, license_plate, make, model, color}) => {
-      if (context.user) {
+    updateUserCar: async (parent, {carId, license_plate, make, model, color}, context) => {
+      if (context.auth) {
         return await Car.findByIdAndUpdate(
           carId, 
           {
