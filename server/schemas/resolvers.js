@@ -17,10 +17,9 @@ const resolvers = {
     // car: async (parent, { license_plate }) => {
     //   return Car.findOne({ license_plate });
     // },
-    // cars: async () => {
-    //   //const params = username ? { username } : {};
-    //   return Car.find();
-    // },
+     cars: async () => {
+      return Car.find();
+     },
     lot: async () => {
       return Lot.find().populate("spaces");
     },
@@ -72,7 +71,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addUserCar: async (parent, { license_plate, make, model, color, owner, userId }, context) => {
+    addUserCar: async (parent, { license_plate, make, model, color,owner }, context) => {
       if (context.user) {
         const car = await Car.create({
           license_plate,
@@ -80,6 +79,7 @@ const resolvers = {
           model,
           color,
           owner
+        
         });
         await User.findByIdAndUpdate(
           context.user._id,

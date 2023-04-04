@@ -44,24 +44,24 @@ function UserProfilePage() {
                 <h1 className="text-center p-2 text-white uppercase">Basic Info</h1>
                 <div className=" border invisible w-full mx-auto md:w-1/2 px-3 mb-6 md:mb-0 p-2 text-center">
                   
-                  <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                    <div class="flex flex-col pb-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                  <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+                    <div className="flex flex-col pb-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Email address
                       </dt>
-                      <dd class="text-lg font-semibold">{userData.email}</dd>
+                      <dd className="text-lg font-semibold">{userData.email}</dd>
                     </div>
-                    <div class="flex flex-col py-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                    <div className="flex flex-col py-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         User Name
                       </dt>
-                      <dd class="text-lg font-semibold">{userData.username}</dd>
+                      <dd className="text-lg font-semibold">{userData.username}</dd>
                     </div>
-                    <div class="flex flex-col pt-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                    <div className="flex flex-col pt-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Phone number
                       </dt>
-                      <dd class="text-lg font-semibold">
+                      <dd className="text-lg font-semibold">
                         {userData.phoneNumber}
                       </dd>
                     </div>
@@ -70,24 +70,24 @@ function UserProfilePage() {
                 <h2 className="text-center text-white p-6">Vehicle Info</h2>
                 <div className=" border invisible w-full mx-auto md:w-1/2 px-3 mb-6 md:mb-0 p-2 text-center">
           
-                  <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                    <div class="flex flex-col pb-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                  <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+                    <div className="flex flex-col pb-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Email address
                       </dt>
-                      <dd class="text-lg font-semibold">{userData.email}</dd>
+                      <dd className="text-lg font-semibold">{userData.email}</dd>
                     </div>
-                    <div class="flex flex-col py-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                    <div className="flex flex-col py-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         User Name
                       </dt>
-                      <dd class="text-lg font-semibold">{userData.username}</dd>
+                      <dd className="text-lg font-semibold">{userData.username}</dd>
                     </div>
-                    <div class="flex flex-col pt-3">
-                      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                    <div className="flex flex-col pt-3">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Phone number
                       </dt>
-                      <dd class="text-lg font-semibold">
+                      <dd className="text-lg font-semibold">
                         {userData.phoneNumber}
                       </dd>
                     </div>
