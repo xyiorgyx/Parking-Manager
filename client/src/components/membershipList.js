@@ -16,19 +16,19 @@ export default function MembersList() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Client Name
+                                Parking Lot
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Car Make/Model (Color)
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Phone Number
+                                Space
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Email
+                               Occupied?
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Payment Status
+                                Reserve
                             </th>
                         </tr>
                     </thead>

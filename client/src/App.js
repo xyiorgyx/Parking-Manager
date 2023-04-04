@@ -16,6 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact'
+import MembersList from './components/membershipList';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -75,8 +76,10 @@ function App() {
                 path="/contactUs" 
                 element={<Contact />}
               />
-            </Routes>
+            </Routes> 
+            
           </div>
+
           <Footer />
         </div>
       </Router>
