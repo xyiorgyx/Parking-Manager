@@ -16,7 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact'
-import Lotcards from './components/lotCards'
+import Lotcards from './components/LotCards'
 
 
 const httpLink = createHttpLink({

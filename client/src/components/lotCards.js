@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { QUERY_LOT } from "../utils/queries";
 import { useQuery } from "@apollo/client";
-import ParkingLotSpots from './ParkingLotSpots';
+import ParkingLotSpots from './ParkingLotSpots'
 import seventhstreetlot from "./images/seventhstreetlot.png"
 
 export default function Lotcards() {
@@ -23,7 +23,7 @@ export default function Lotcards() {
           return (
             <div className="min-w-5- max-w-50 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" key={lot._id}>
               <a href="#">
-                <img className="rounded-t-lg" href={seventhstreetlot} alt="" />
+                <img className="rounded-t-lg" src={seventhstreetlot} alt="" />
               </a>
               <div className="p-5">
                 <a href="#">
