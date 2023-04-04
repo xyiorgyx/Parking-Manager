@@ -15,13 +15,13 @@ export default function Lotcards() {
   const lotList = data?.lot || [];
   console.log(lotList)
   return (
-    <div className="min-h-full w-screen flex flex-wrap relative shadow-md sm:rounded-lg">
+    <div className="bg-gray-900 min-h-full w-screen flex flex-wrap relative shadow-md sm:rounded-lg">
       {loading ? (
         <div>Loading...</div>
       ) : (
         lotList.map((lot) => {
           return (
-            <div className="min-w-5- max-w-50 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" key={lot._id}>
+            <div className="bg-gray-900  min-w-5- max-w-50 border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700" key={lot._id}>
               <a href="#">
                 <img className="rounded-t-lg" src={seventhstreetlot} alt="" />
               </a>

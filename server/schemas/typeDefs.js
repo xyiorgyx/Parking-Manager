@@ -66,7 +66,7 @@ type Mutation {
     addCarSpace(carId:ID!, spaceId:ID!, spaceName:String!, parkingLot:String!): Car
     deleteCarSpace(carId:ID!, spaceId:ID!): User
 
-    occupySpace(spaceId:ID!): Space
+    occupySpace(spaceName:String!): Space
     vacateSpace(spaceId:ID!):Space
   }
 `;
