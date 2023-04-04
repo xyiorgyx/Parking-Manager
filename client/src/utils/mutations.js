@@ -51,7 +51,6 @@ export const ADD_USER_CAR = gql`
       color: $color
       owner: $owner
     ) {
-      _id
       license_plate
       make
       model
