@@ -10,10 +10,12 @@ db.once('open', async () => {
     await Car.deleteMany({});
     await User.deleteMany({});
     await Space.deleteMany({});
+    await Lot.deleteMany({});
+
     await User.create(userSeed);
     await Lot.create(lotSeed);
     await Car.create(carSeed);
-    
+    await Space.create(spaceSeed);
 
 
     for (let i = 0; i < carSeed.length; i++) {
@@ -34,7 +36,7 @@ db.once('open', async () => {
         { lotName: parkingLot },
         {
           $addToSet: {
-            lotSpaces: _id,
+            _id: _id,
           },
         }
       );

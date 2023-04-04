@@ -152,11 +152,16 @@ const resolvers = {
     },
     //throw new AuthenticationError("You need to be logged in!");
 
-    occupySpace: async (parent, { spaceId }, context) => {
+    occupySpace: async (parent, { spaceName, occupied, }, context) => {
       if (context.user) {
-        return await Space.findOneAndUpdate(
-          { _id: spaceId },
-          { $set: { occupied: true } },
+        await Space.findOneAndUpdate(
+          { spaceName },
+          { occupied },
+          { new: true }
+        );
+        await Car.findByIdAndUpdate(
+          _id,
+          { $addToSet: { spaces: { spaceName} } },
           { new: true }
         );
       }

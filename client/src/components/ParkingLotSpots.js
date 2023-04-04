@@ -1,6 +1,8 @@
-import { React } from 'react';
+import { React,useState } from 'react';
 import { QUERY_SPACE } from '../utils/queries';
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { OCCUPY_SPACE } from "../utils/mutations";
 
 export default function ParkingLotSpots() {
 
@@ -8,14 +10,34 @@ export default function ParkingLotSpots() {
 
     const spaces = data?.spaces || [];
 
+    const [spaceState, setSpaceState] = useState({occupied:false});
 
-const handleChange(name)=(e) =>{
- 
-}
+
+    const [occupySpace, { error, date }] = useMutation(OCCUPY_SPACE);
+
+      const handleChange = (event) => {
+        setSpaceState((current) => !current);
+        //setOccupantState({occupant: Auth.getProfile().data.user.username})
+      };
+
+      const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+          const { data } = await occupySpace({
+            variables: {
+              spaceState
+            },
+          });
+        } catch (e) {
+          console.error(e);
+        }
+    }
+//const handleChange(spaceName)=(e) =>{
     console.log(spaces)
 
     return (
-        <div className="mx-auto flex flex-col   lg:px-40 overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="mx-auto flex flex-col w-full h-full bg-gray-900  lg:px-40 overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -44,10 +66,10 @@ const handleChange(name)=(e) =>{
                             Parking Space: {space.spaceName}
                         </td>
                         <td className="px-6 py-4 ">
-                            Occupied: {space.occupied}
+                            Occupied: {space.occupied ? "Occupied":"Empty"}
                         </td>
                         <td className="px-6 py-4 text-green-500">
-                            <button onClick = {handleChange(space.spaceName)}>Reserve</button>
+                            <button >Reserve</button>
                         </td>
                     </tr>
                 </tbody>
