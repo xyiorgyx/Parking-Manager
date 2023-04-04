@@ -1,7 +1,5 @@
 import React from "react";
-import MembersList from "../components/membershipList"; 
 import Login from "../pages/Login"
-
 function Home() {
   return (
     <main>

@@ -1,163 +1,163 @@
 [
     {
         "spaceName":"A1",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
     },
     {
         "spaceName":"A2",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A3",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A4",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A5",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },   
     {
         "spaceName":"A6",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A7",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A8",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"A9",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B1",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B2",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B3",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B4",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B5",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B6",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B7",
-        "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "occupied":true,
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B8",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"B9",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C1",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C2",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C3",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C4",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C5",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C6",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C7",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C8",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     },
     {
         "spaceName":"C9",
         "occupied":false,
-        "parkingLot" :"Pete's Private Lot"
+        "parkingLot" :"7th Street Station"
 
     }
 ]
