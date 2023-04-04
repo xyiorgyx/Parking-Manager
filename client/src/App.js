@@ -18,7 +18,6 @@ import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact';
 import Lotcards from './components/LotCards';
 
-
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -46,8 +45,6 @@ function App() {
       <Router>
         <div>
           <Header />
-          <div className="">
-            
             <Routes>
               <Route 
                 path="/" 
@@ -73,6 +70,7 @@ function App() {
                 path="/contactUs" 
                 element={<Contact />}
               />
+
               
                 <Route 
                 path="/lotcards" 
@@ -81,12 +79,15 @@ function App() {
               
             </Routes> 
 
+
           </div>
           <Footer />
-        </div>
       </Router>
     </ApolloProvider>
   );
 }
 
+
 export default App;
+
+
