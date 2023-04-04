@@ -32,6 +32,9 @@ type Space {
 type Lot {
     _id: ID!
     lotName:String
+    address:String
+    parkingRate:Int
+    photo: String
     spaces:[Space]
 }
 
