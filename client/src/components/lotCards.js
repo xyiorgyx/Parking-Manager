@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { QUERY_LOT } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import ParkingLotSpots from './ParkingLotSpots';
+import seventhstreetlot from "./images/seventhstreetlot.png"
 
 export default function Lotcards() {
   const { loading, data } = useQuery(QUERY_LOT);
@@ -14,7 +15,7 @@ export default function Lotcards() {
   const lotList = data?.lot || [];
   console.log(lotList)
   return (
-    <div className="h-screen w-screen flex flex-wrap relative shadow-md sm:rounded-lg">
+    <div className="min-h-full w-screen flex flex-wrap relative shadow-md sm:rounded-lg">
       {loading ? (
         <div>Loading...</div>
       ) : (
@@ -22,7 +23,7 @@ export default function Lotcards() {
           return (
             <div className="min-w-5- max-w-50 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" key={lot._id}>
               <a href="#">
-                <img className="rounded-t-lg" href={lot.photo} alt="" />
+                <img className="rounded-t-lg" href={seventhstreetlot} alt="" />
               </a>
               <div className="p-5">
                 <a href="#">
@@ -38,6 +39,7 @@ export default function Lotcards() {
               </div>
             </div>
           )
+
         })
       )}
     </div>

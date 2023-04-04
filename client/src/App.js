@@ -45,7 +45,7 @@ function App() {
       <Router>
         <div>
           <Header />
-          <div className="h-screen">
+          <div className="">
             
             <Routes>
               <Route 

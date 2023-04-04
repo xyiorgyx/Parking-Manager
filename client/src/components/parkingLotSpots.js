@@ -19,16 +19,16 @@ export default function ParkingLotSpots() {
                                 Parking Lot
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Car Make/Model (Color)
+                                Parking Space
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Phone Number
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Email
+                               Floor
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Payment Status
+                                <button>Reserve</button>
                             </th>
                         </tr>
                     </thead>
