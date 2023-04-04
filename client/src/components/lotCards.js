@@ -1,84 +1,42 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_LOT } from '../utils/queries';
+import { QUERY_LOT } from "../utils/queries";
+import { useQuery } from "@apollo/client";
 
 export default function Lotcards() {
-  const { loading, error, data } = useQuery(QUERY_LOT);
-  const [hasError, setHasError] = useState(false);
-  const [showCards, setShowCards] = useState(false);
-  const [showSpaces, setShowSpaces] = useState(false);
-  const [lotId, setLotId] = useState(null);
-  const [spaces, setSpaces] = useState([]);
-  const lotList = data?.lots || [];
+  const { loading, data } = useQuery(QUERY_LOT);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  const handleReserveButtonClick = (lotId) => {
-    setLotId(lotId);
-    setShowSpaces(true);
-  };
-
-  const handleSpacesButtonClick = () => {
-    setShowSpaces(false);
-  };
-
-  const handleButtonClick = () => {
-    setShowCards(true);
-  };
+  const lotList = data?.lot || [];
 
   return (
-    <div>
-      <button onClick={handleButtonClick}>Show Lots</button>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        {loading ? (
-          <div>Loading...</div>
-        ) : hasError ? (
-          <div>Error: {error.message}</div>
-        ) : showCards ? (
-          lotList.map((lot) => {
-            return (
-              <div className="max-w-sm rounded overflow-hidden shadow-lg" key={lot.id}>
-                <img className="w-full" src={lot.photo} alt={lot.lotName} />
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2">{lot.lotName}</div>
-                  <p className="text-gray-700 text-base">
-                    Located near the Center of Charlotte, NC. The 7th street station also offers a fantastic local market
-                    for food and refreshments. Amongst them, Denos Pizza is ranked 33 in the world for best pizzeria on
-                    Yelp.
-                  </p>
-                </div>
-                <div className="px-6 pt-4 pb-2">
-                  <button
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                    onClick={() => handleReserveButtonClick(lot.id)}
-                  >
-                    Reserve
-                  </button>
-                </div>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        lotList.map((lot) => {
+          return (
+            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" key={lot._id}>
+              <a href="#">
+                <img className="rounded-t-lg" href={lot.photo} alt="" />
+              </a>
+              <div className="p-5">
+                <a href="#">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{lot.lotName}</h5>
+                </a>
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{lot.address}</p>
+                <p>${lot.parkingRate}</p>
+                <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Reserve
+                  <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                </a>
               </div>
-            );
-          })
-        ) : showSpaces ? (
-          <div>
-            <button onClick={handleSpacesButtonClick}>Back to Lots</button>
-            <h2>Spaces for Lot {lotId}</h2>
-            {spaces.length > 0 ? (
-              spaces.map((space) => (
-                <div key={space._id}>
-                  <p>Space ID: {space._id}</p>
-                  <p>Space Name: {space.spaceName}</p>
-                </div>
-              ))
-            ) : (
-              <div>No spaces available for this lot</div>
-            )}
-          </div>
-        ) : (
-          <div>No lots to show</div>
-        )}
-      </div>
+            </div>
+          )
+        })
+      )}
     </div>
   );
 }
+
+
+
+
