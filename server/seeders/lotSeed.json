@@ -1,5 +1,6 @@
 [
     {
+        "id":1,
         "lotName":"7th Street Station",
         "address":"270E E 7th St, Charlotte, NC 28202",
         "parkingRate": 5,

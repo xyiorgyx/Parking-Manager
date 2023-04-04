@@ -41,17 +41,19 @@ export const QUERY_CARS = gql`
 `;
 
 export const QUERY_LOT = gql`
-  query getLot {
+  query Lot {
     lot {
-        _id
-        lotName
-        address
-        parkingRate
-        photo
+      lotName
+      _id
+      address
+      parkingRate
+      photo
         }
         space{
             _id
             spaceName
+            occupied
+            parkingLot
         }
     }
 `;
