@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
 //import { QUERY_CARS } from "../../utils/queries";
-//import { QUERY_USER } from "../../utils/queries";
+import { QUERY_USER } from "../../utils/queries";
 import Auth from "../../utils/Auth";
 
 const CarForm = (props) => {
@@ -12,9 +12,11 @@ const CarForm = (props) => {
     make: "",
     model: "",
     color: "",
+  
   });
+  const [owner, setOwner] = useState("");
 
-  const [addUserCar, { error }] = useMutation(ADD_USER_CAR); /*, {
+  /*const [addUserCar, { error, data }] = useMutation(ADD_USER_CAR); /* {
     update(cache, { data: { addUserCar } }) {
       try {
         const cars = cache.readQuery({ query: QUERY_CARS});
@@ -23,22 +25,38 @@ const CarForm = (props) => {
           query: QUERY_CARS,
           data: { cars: [addUserCar, ...cars] },
         });
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.error(e);
       }
-
       const { user } = cache.readQuery({ query: QUERY_USER });
       cache.writeQuery({
         query: QUERY_USER,
-        data: { user: { ...user, cars: [...user.cars, addUserCar] } },
+        data: { user: { ...user, cars: [...user.cars, addUserCar] }},
       });
+    }
+   });*/
+   const [addUserCar, { error }] = useMutation(ADD_USER_CAR, {
+    update(cache, { data: { addUserCar } }) {
+      try {
+        const { newCar } = cache.readQuery({
+          query: QUERY_USER,
+        });
+        cache.writeQuery({
+          query: QUERY_USER,
+          data: { user: { cars: [addUserCar, ...newCar] } },
+        });
+      } catch (e) {
+        console.error(e);
+      }
     },
-  });*/
+  });
+    
+ 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log('change');
 
     setFormState({ ...formState, [name]: value });
+    setOwner()
   };
 
   const handleFormSubmit = async (event) => {
@@ -51,6 +69,7 @@ const CarForm = (props) => {
           owner: Auth.getProfile().data.username,
         }     
       });
+      Auth.loggedIn(data.addUserCar.token)
     } catch (e) {
       console.error(e);
     }
@@ -59,6 +78,7 @@ const CarForm = (props) => {
       make: "",
       model: "",
       color: "",
+
     });
   };
 console.log(formState, Auth.getProfile().data.username);
