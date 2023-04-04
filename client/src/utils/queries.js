@@ -15,6 +15,7 @@ export const QUERY_USER = gql`
         owner
         spaces {
           _id
+          occupant
           occupied
           parkingLot
           spaceName
@@ -115,6 +116,16 @@ export const QUERY_USERS = gql`
         model
         color
       }
+    }
+  }
+`;
+
+export const QUERY_SPACE = gql`
+  query spaces {
+  spaces{
+    parkingLot
+    spaceName
+    occupied
     }
   }
 `;
