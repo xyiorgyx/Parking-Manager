@@ -16,6 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact'
+
 import Lotcards from './components/lotCards'
 
 
@@ -47,7 +48,6 @@ function App() {
         <div>
           <Header />
           <div className="">
-            
             <Routes>
               <Route 
                 path="/" 
@@ -73,17 +73,13 @@ function App() {
                 path="/contactUs" 
                 element={<Contact />}
               />
-              
                 <Route 
                 path="/lotcards" 
                 element={<Lotcards />}
               />
-              
             </Routes> 
-
           </div>
           <Footer />
-        </div>
       </Router>
     </ApolloProvider>
   );
