@@ -8,7 +8,7 @@ export default function MembersList() {
     const userList = data?.users || [];
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative shadow-md sm:rounded-lg">
             {loading ? (
                 <div>Loading...</div>
             ) : (
@@ -16,7 +16,7 @@ export default function MembersList() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Parking Lot
+                                Owner
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Car Make/Model (Color)

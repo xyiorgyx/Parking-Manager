@@ -62,7 +62,7 @@ export const QUERY_LOT = gql`
       parkingRate
       photo
         }
-        space{
+        spaces{
             _id
             spaceName
             occupied
