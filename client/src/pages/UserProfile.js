@@ -36,36 +36,28 @@ console.log(userData);
 
   return (
     <main className="bg-gray-50 dark:bg-gray-900 p-6">
-         <div >
+       
+      <div>
+      {userData ? (
+        <div className="">
+          <div className="container  mx-auto  lg:px-40">
+            <div className="">
+              <h1 className=" font-bold text-center text-white uppercase ">
+                Welcome {userData.name}!
+                <div className='p-2'>
           {Auth.loggedIn() ? (
-              <button className="btn btn-lg btn-light  m-2 ">
-                <Link to="/carForm"> Add Car</Link>
-              </button>
-          ) : (
-            <div></div>
-          )}
-        </div>
-        <div className=''>
-          {Auth.loggedIn() ? (
-              <button className="btn btn-lg btn-light  m-2 ">
+              <button className="btn border p-2 bg-blue-500 btn-lg btn-light  text-sm font-bold text-center  uppercase text-white m-2 ">
                 <Link to="/updateInfo"> Update Info</Link>
               </button>
           ) : (
             <div></div>
           )}
         </div>
-      <div>
-      {userData ? (
-        <div className="mx-auto md:h-screen lg:py-0">
-          <div className="container  mx-auto  lg:px-40">
-            <div className="">
-              <h1 className=" font-bold text-center text-white uppercase ">
-                Welcome {userData.name}!
               </h1>
               <section className="p-6">
             
                 {/* User Infomation */}
-                <h1 className="text-center p-2 text-white uppercase">Basic Info</h1>
+                <h1 className="text-center p-2 text-blue-500 font-bold uppercase">Basic Info</h1>
                 <div className=" w-full bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 text-center">
                   
                   <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
@@ -91,13 +83,26 @@ console.log(userData);
                     </div>
                   </dl>
                 </div>
-                <h2 className="text-center text-white p-6">Vehicle Info</h2>
+                </section>
+                {/* Vehicle Info  */}
+                <h2 className="text-center font-bold text-xl text-blue-500 p-6">Vehicle Info
+                <div >
+          {Auth.loggedIn() ? (
+              <button className="btn border p-2 bg-blue-500 btn-lg btn-light  text-sm font-bold text-center  uppercase text-white m-2 ">
+                <Link to="/carForm"> Add Car</Link>
+              </button>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        </h2>
+                <section className="flex flex-row ">
                 {userData.cars.map(car => (
-                <div key={car._id} className=" w-full bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
+                <div key={car._id} className="  bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
           
                   <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                     <div className="flex flex-col pb-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 px-10 text-gray-500 md:text-lg dark:text-gray-400">
                         Vehicle Make
                       </dt>
                       <dd className="text-lg font-semibold">{car.make}</dd>
@@ -118,7 +123,8 @@ console.log(userData);
                     </div>
                   </dl>
                 </div>))}
-              </section>
+                </section>
+            
               <div></div>
             </div>
           </div>
