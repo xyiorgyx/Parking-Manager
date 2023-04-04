@@ -34,7 +34,7 @@ type Lot {
     lotName:String
     address:String
     parkingRate:Int
-    photo: String
+    photo:String
     spaces:[Space]
 }
 

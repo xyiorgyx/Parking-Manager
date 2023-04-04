@@ -5,7 +5,7 @@ import { QUERY_CAR} from "../../utils/queries";
 import Auth from "../../utils/Auth";
 
 
-const  AddSpace = () => {
+const  OccupySpace = () => {
     const [spaceState, setSpaceState] = useState({occupied:false});
     const [occupantState, setOccupantState] = useState
     ({
@@ -49,3 +49,5 @@ const  AddSpace = () => {
         }
     }
 }
+
+export default OccupySpace;

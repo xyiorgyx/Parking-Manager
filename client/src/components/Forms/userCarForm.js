@@ -58,15 +58,16 @@ const CarForm = () => {
   console.log(formState);
   return (
     <>
-      <main className="bg-gray-50 dark:bg-gray-900 p-6  ">
+      <main className="bg-gray-50 dark:bg-gray-900 p-6   ">
+      <h2 className="p-6 text-center text-xl text-blue-500 font-bold uppercase">Vehicle Information</h2>
         <form
           onSubmit={handleFormSubmit}
           action="#"
-          className="p-6 max-w-lg flex flex-col  mx-auto md:h-screen lg:py-0"
+          className="p-6 max-w-lg rounded-lg flex flex-col  mx-auto md:h-screen lg:py-0"
         >
           <div className="bg-gray-200  ">
-            <h2 className="p-6 text-center">Vehicle Information</h2>
-            <div className=" border p-6">
+            {/* <h2 className="p-6 text-center">Vehicle Information</h2> */}
+            <div className=" border p-6 ">
               <div className="">
                 <div className="w-full md:w-1/2 px-4 mb-2 md:mb-0">
                   <label className="block uppercase tracking-wide  text-xs font-bold mb-2">
@@ -78,7 +79,7 @@ const CarForm = () => {
                     onChange={handleChange}
                     type="text"
                     placeholder="Car Model"
-                    className="appearance-none block w-full bg-black text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     required=""
                   />
                 </div>
@@ -93,7 +94,7 @@ const CarForm = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="Car Make"
-                  className="appearance-none block w-full bg-black text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   required=""
                 />
               </div>
@@ -108,7 +109,7 @@ const CarForm = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="Car Color"
-                  className="appearance-none block w-full bg-black text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   required=""
                 />
               </div>
@@ -123,13 +124,13 @@ const CarForm = () => {
                   type="text"
                   placeholder="Car License"
                   required=""
-                  className="appearance-none block w-full bg-black text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 />
               </div>
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
                 <button
                   type="submit"
-                  className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="btn border p-2 bg-blue-500 btn-lg btn-light  text-xs font-bold text-center rounded-lg  uppercase text-white m-2"
                 >
                   Submit
                 </button>

@@ -16,7 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact';
-import UpdateCar from './components/Forms/updateCarForm';
+import Lotcards from './components/LotCards';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -45,8 +45,6 @@ function App() {
       <Router>
         <div>
           <Header />
-          <div className="flex-column justify-flex-start min-100-vh">
-            
             <Routes>
               <Route 
                 path="/" 
@@ -60,29 +58,36 @@ function App() {
                 path="/signup" 
                 element={<Signup />}
               />
+              <Route 
+                path="/me" 
+                element={<Profile />}
+              />
                 <Route 
                 path="/carForm" 
                 element={<CarForm/>}
-              />
-              <Route 
-                path="/me"
-                element={<Profile />}
-              />
-                 <Route 
-                path="/updateCar" 
-                element={<UpdateCar/>}
               />
                 <Route 
                 path="/contactUs" 
                 element={<Contact />}
               />
-            </Routes>
+
+              
+                <Route 
+                path="/lotcards" 
+                element={<Lotcards />}
+              />
+              
+            </Routes> 
+
+
           </div>
           <Footer />
-        </div>
       </Router>
     </ApolloProvider>
   );
 }
 
+
 export default App;
+
+
