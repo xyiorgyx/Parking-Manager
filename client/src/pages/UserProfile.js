@@ -159,7 +159,7 @@ console.log(userData);
                         {car.license_plate}
                       </dd>
                     </div>
-<<<<<<< HEAD
+
                     <div className=''>
           {Auth.loggedIn() ? (
               <button className="btn btn-lg btn-light  m-2 ">
@@ -169,10 +169,10 @@ console.log(userData);
             <div></div>
           )}
         </div>
-=======
+
                     
                     <button className="btn border p-2 bg-red-500 btn-lg btn-light  text-xs font-bold text-center rounded-lg  uppercase text-white m-2" onClick={() => handleDeleteCar(car._id)}>Delete</button>
->>>>>>> c14ef52bcdebf5cad6f75ab29f6f87fbf0316777
+
                   </dl>
                 </div>))}
                 </section>
