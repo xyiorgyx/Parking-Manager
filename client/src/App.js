@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact'
 import MembersList from './components/membershipList';
+import UpdateUser from './components/Forms/updateinfo';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -46,34 +47,38 @@ function App() {
         <div>
           <Header />
           <div className="flex-column justify-flex-start min-100-vh">
-            
+
             <Routes>
-              <Route 
-                path="/" 
+              <Route
+                path="/"
                 element={<Home />}
               />
-              <Route 
-                path="/login" 
+              <Route
+                path="/login"
                 element={<Login />}
               />
-              <Route 
-                path="/signup" 
+              <Route
+                path="/signup"
                 element={<Signup />}
               />
-                <Route 
-                path="/carForm" 
-                element={<CarForm/>}
+              <Route
+                path="/carForm"
+                element={<CarForm />}
               />
-              <Route 
+              <Route
                 path="/me"
                 element={<Profile />}
               />
-                <Route 
-                path="/contactUs" 
+              <Route
+                path="/contactUs"
                 element={<Contact />}
               />
-            </Routes> 
-            
+              <Route
+                path="/updateinfo"
+                element={<UpdateUser />}
+              />
+            </Routes>
+
           </div>
 
           <Footer />
