@@ -30,5 +30,13 @@
         "phoneNumber": "704-278-4927",
         "email":"kristenbell@gmail.com",
         "paid":false
+    },
+    {
+    "username":"xyiorgyx",
+    "password":"3225",
+    "name": "Yiorgos Bosnakis",
+    "phoneNumber": "704-555-8945",
+    "email":"Yiorgosbos@aol.com",
+    "paid":false
     }
 ]
