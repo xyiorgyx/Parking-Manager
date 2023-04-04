@@ -2,7 +2,7 @@ import React from 'react';
 import { QUERY_USERS } from "../utils/queries"
 import { useQuery } from "@apollo/client"
 
-export default function MembersList() {
+export default function ParkingLotSpots() {
     const { loading, data } = useQuery(QUERY_USERS);
 
     const userList = data?.users || [];
@@ -16,7 +16,7 @@ export default function MembersList() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Client Name
+                                Parking Lot
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Car Make/Model (Color)

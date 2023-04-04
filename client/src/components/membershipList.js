@@ -8,7 +8,7 @@ export default function MembersList() {
     const userList = data?.users || [];
 
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative shadow-md sm:rounded-lg">
             {loading ? (
                 <div>Loading...</div>
             ) : (
