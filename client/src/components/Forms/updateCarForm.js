@@ -1,49 +1,14 @@
-import React, { useState } from "react";
-//import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { ADD_USER_CAR } from "../../utils/mutations";
-import Auth from "../../utils/Auth";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 
-const CarForm = (props) => {
-  const [formState, setFormState] = useState({
-    license_plate: "",
-    make: "",
-    model: "",
-    color: "",
-    owner: Auth.getProfile().data.username
-  });
-  const [addUserCar, { error,data }] = useMutation(ADD_USER_CAR); 
- 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+import { UPDATE_USER_CAR } from "../../utils/actions";
+import { QUERY_CARS } from '../utils/queries';
 
-    setFormState({ ...formState, [name]: value });
-  
-  };
+function UpdateCar() {
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
 
-    try {
-      const { data } = await addUserCar({
-        variables: {
-          ...formState
-        }
-        
-      });
-    } catch (e) {
-      console.error(e);
-    }
-    setFormState({
-      license_plate: "",
-      make: "",
-      model: "",
-      color: "",
-      owner: Auth.getProfile().data.username
-    });
-  };
-  console.log(formState);
-  return (
+return (
     <>
       <main className="bg-gray-50 dark:bg-gray-900 p-6  ">
         <form
@@ -129,4 +94,4 @@ const CarForm = (props) => {
   );
 }
 
-export default CarForm;
+export default UpdateCar;

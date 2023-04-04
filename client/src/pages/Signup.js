@@ -12,23 +12,7 @@ const Signup = () => {
     phoneNumber: "",
     name: "",
   });
-  const [addUser] = useMutation(ADD_USER);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        username: formState.username,
-        email: formState.email,
-        password: formState.password,
-        phoneNumber: formState.phoneNumber,
-        name: formState.name,
-      },
-    });
-
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-  };
+  const [addUser,{ error, data } ] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,8 +20,21 @@ const Signup = () => {
       ...formState,
       [name]: value,
     });
-    console.log(formState);
   };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   return (
     <main className="bg-gray-50 dark:bg-gray-900">
@@ -162,3 +159,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
