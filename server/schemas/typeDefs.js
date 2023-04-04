@@ -45,7 +45,7 @@ type Auth {
 
 
 type Query {
-    #users:[User]
+    users:[User]
     me: User
     user(userId:ID!):User
     car(carId:ID!):Car
@@ -62,8 +62,12 @@ type Mutation {
 
     addUserCar(license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
     deleteUserCar(carId:ID!): Car
-    updateUserCar(_id:ID!,license_plate:String, make:String, model:String, color:String): Car
-    addCarSpace(carId:ID!, spaceId:ID!, spaceName:String!, parkingLot:String!): Car
+    updateUserCar(carId:ID!, license_plate:String,
+        make:String,
+        model:String,
+        color:String,
+        owner:String): Car
+    addCarSpace(carId:ID!, spaceId:ID!, spaceName:String, parkingLot:String, occupied:Boolean, occupant:String): Car
     deleteCarSpace(carId:ID!, spaceId:ID!): User
 
     occupySpace(spaceId:ID!): Space

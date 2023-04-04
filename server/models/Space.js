@@ -14,6 +14,9 @@ const spaceSchema = new Schema(
         parkingLot: {
             type:String,
             required:true
+        },
+        occupant: {
+            type:String
         }
     },
 );

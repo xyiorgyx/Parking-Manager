@@ -73,11 +73,12 @@ export const DELETE_USER_CAR = gql`
 `;
 
 export const OCCUPY_SPACE = gql`
-  mutation occupySpace($spaceId: ID!, $license_plate: String!) {
-    occupySpace(spaceId: $spaceId, license_plate: $license_plate) {
+  mutation occupySpace($spaceId: ID!, $carID:ID!, $license_plate: String!, $occupied:Boolean, $occupant:String) {
+    occupySpace(spaceId: $spaceId, license_plate: $license_plate, occupied:$occupied, occupant:$occupant) {
       _id
       spaceName
       occupied
+      occupant
       parkingLot
     }
   }
@@ -94,26 +95,5 @@ export const VACATE_SPACE = gql`
   }
 `;
 
-export const UPDATE_USER_CAR =   
-`mutation UpdateUserCar(
-  $license_plate: String
-  $make: String
-  $model: String
-  $color: String
-  $owner: String
-) {
-  UpdateUserCar(
-    license_plate: $license_plate
-    make: $make
-    model: $model
-    color: $color
-    owner: $owner
-  ) {
-    license_plate
-    make
-    model
-    color
-    owner
-  }
-}
-`;
+  
+;

@@ -29,7 +29,7 @@ export const QUERY_USER = gql`
 
 export const QUERY_CARS = gql`
   query cars {
-    car {
+    cars {
       _id
       license_plate
       make

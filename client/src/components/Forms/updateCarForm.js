@@ -1,28 +1,75 @@
+import React, { useReducer, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { reducer } from '../../utils/reducers';
+import { useQuery } from '@apollo/client';
+
+import { useAppContext } from '../../utils/GlobalState';
+import { UPDATE_CAR} from '../../utils/actions';
+
+/*import { QUERY_CARS } from '../../utils/queries';
+
+function UpdateCar () {
+const initialState = useApp();
+const [state, dispatch] = useReducer(reducer, initialState);
+
+const handleChange = (event) => {
+  dispatch({
+    type: UPDATE_CAR,
+    value: event.target.value,
+  });
+}
 import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER_CAR } from "../../utils/mutations";
-import { QUERY_CAR} from "../../utils/queries"
+import { QUERY_CARS , QUERY_ME} from "../../utils/queries"
 import Auth from "../../utils/Auth";
 
 const UpdateCar = () => {
 
-    function carData ({initialCarData}){
-
-    const { initialCarData } = cache.readQuery({query:QUERY_CAR});
-        
-    const [carState, setCarState] = useState({ initialCarData });
-
-    const [updateUserCar, { error,data }] = useMutation(UPDATE_USER_CAR),
-    { update cache, { data: { updateUserCar} }
-}; 
+    const [carState, setCarState] = useState({ 
+      license_plate: "",
+      make: "",
+      model: "",
+      color: "",
+      owner: Auth.getProfile().data.username,
+     });
+  
+    const [updateUserCar, { error, date }] = useMutation(UPDATE_USER_CAR, {
+      update(cache, { data: { updateUserCar } }) {
+        try {
+          const { cars } = cache.readQuery({
+            query: QUERY_CARS,
+          });
+          console.log({ cars });
+          cache.writQuery ({
+            query: QUERY_CARS,
+            data: { cars: [...cars, updateUserCar]  },
+          });
+          console.log('hellobro');
+          const { me } = cache.readQuery({
+            query: QUERY_ME,
+          });
+          console.log({ me });
+          cache.writQuery({
+            query: QUERY_ME,
+            data: { me: { cars: [...me.cars, updateUserCar] } },
+          });
+          console.log({cars});
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    });
+ 
 
     const handleChange = (event) => {
-        const{name, value } = event.target;
-        setCarState({
-            ...carState, [name]:value
-        })
+        const{ name, value } = event.target;
+        setCarState(prevState => ({
+            ...prevState, [name]:value
+        }));
     };
+console.log('hello');
 
     const handleFormSubmit = async(event)=>
     {
@@ -43,12 +90,8 @@ const UpdateCar = () => {
             color: "",
             owner: Auth.getProfile().data.username
           });
-        }
-
-    }
-    }
-   
-
+        };
+console.log('helloworld');
 return (
     <>
       <main className="bg-gray-50 dark:bg-gray-900 p-6  ">
@@ -66,7 +109,7 @@ return (
                     Car Model
                   </label>
                   <input
-                    value={formState.model}
+                    value={carState.model}
                     name="model"
                     onChange={handleChange}
                     type="text"
@@ -81,7 +124,7 @@ return (
                   Car Make
                 </label>
                 <input
-                  value={formState.make}
+                  value={carState.make}
                   name="make"
                   onChange={handleChange}
                   type="text"
@@ -96,7 +139,7 @@ return (
                 </label>
 
                 <input
-                  value={formState.color}
+                  value={carState.color}
                   name="color"
                   onChange={handleChange}
                   type="text"
@@ -110,7 +153,7 @@ return (
                   License Number
                 </label>
                 <input
-                  value={formState.license_plate}
+                  value={carState.license_plate}
                   name="license_plate"
                   onChange={handleChange}
                   type="text"
@@ -133,6 +176,8 @@ return (
       </main>
     </>
   );
-}
+    }
+
 
 export default UpdateCar;
+*/

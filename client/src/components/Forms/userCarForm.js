@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
-import { QUERY_CARS } from "../../utils/queries";
 import Auth from "../../utils/Auth";
 import { QUERY_ME } from "../../utils/queries";
 

@@ -116,6 +116,15 @@ console.log(userData);
                         {car.license_plate}
                       </dd>
                     </div>
+                    <div className=''>
+          {Auth.loggedIn() ? (
+              <button className="btn btn-lg btn-light  m-2 ">
+                <Link to="/updateCar"> Update Car</Link>
+              </button>
+          ) : (
+            <div></div>
+          )}
+        </div>
                   </dl>
                 </div>))}
               </section>
