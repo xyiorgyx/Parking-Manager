@@ -12,9 +12,9 @@ const CarForm = (props) => {
     make: "",
     model: "",
     color: "",
+    owner: Auth.getProfile().data.username
   });
-
-  const [addUserCar, { error }] = useMutation(ADD_USER_CAR); /*, {
+  const [addUserCar, { error,data }] = useMutation(ADD_USER_CAR); /*, {
     update(cache, { data: { addUserCar } }) {
       try {
         const cars = cache.readQuery({ query: QUERY_CARS});
@@ -36,7 +36,6 @@ const CarForm = (props) => {
   });*/
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log('change');
 
     setFormState({ ...formState, [name]: value });
   };
@@ -47,9 +46,9 @@ const CarForm = (props) => {
     try {
       const { data } = await addUserCar({
         variables: {
-          ...formState,
-          owner: Auth.getProfile().data.username,
-        }     
+          ...formState
+        }
+        
       });
     } catch (e) {
       console.error(e);
@@ -59,9 +58,10 @@ const CarForm = (props) => {
       make: "",
       model: "",
       color: "",
+      owner: Auth.getProfile().data.username
     });
   };
-console.log(formState, Auth.getProfile().data.username);
+  console.log(formState);
   return (
     <>
       <main className="bg-gray-50 dark:bg-gray-900 p-6  ">

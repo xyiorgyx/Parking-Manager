@@ -45,6 +45,9 @@ export const QUERY_LOT = gql`
     lot {
         _id
         lotName
+        address
+        parkingRate
+        photo
         }
         space{
             _id

@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
+import Admin from './pages/AdminProfile'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -65,6 +66,10 @@ function App() {
                 <Route 
                 path="/carForm" 
                 element={<CarForm/>}
+              />
+              <Route 
+                path="/admin" 
+                element={<Admin/>}
               />
               <Route 
                 path="/profiles/:profileId"

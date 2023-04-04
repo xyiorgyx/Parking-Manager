@@ -32,6 +32,9 @@ type Space {
 type Lot {
     _id: ID!
     lotName:String
+    address:String
+    parkingRate:Int
+    photo: String
     spaces:[Space]
 }
 
@@ -56,7 +59,7 @@ type Mutation {
     updateUser(userId:ID!): Auth
     deleteUser(userId:ID!): Auth
 
-    addUserCar(license_plate:String!, make:String!, model:String!, color:String!): Car
+    addUserCar(license_plate:String!, make:String!, model:String!, color:String!, owner:String!): Car
     deleteUserCar(carId:ID!): Car
     updateUserCar(carId:ID!,license_plate:String!, make:String!, model:String!, color:String!): Car
 
