@@ -5,15 +5,15 @@ import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { Navigate, useParams } from "react-router-dom";
 import UserCarForm from "../components/Forms/userCarForm";
 
-function UserProfilePage() {
-  const { username: userParam } = useParams();
+const UserProfilePage = () => {
+  const { userId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_USER, QUERY_ME, {
-   variables: {username: userParam},
+  const { loading, data } = useQuery(QUERY_USER, {
+   variables: {userId: userId},
   });
 
-  const userData = data?.user || data?.me || {};
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  const user = data?.user || {};
+  if (Auth.loggedIn() && Auth.getProfile().data.userId === userId) {
     return <Navigate to="/me" />;
   }
 
@@ -49,7 +49,7 @@ function UserProfilePage() {
                       <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Email address
                       </dt>
-                      <dd className="text-lg font-semibold">{userData.email}</dd>
+                      <dd className="text-lg font-semibold">{user.email}</dd>
                     </div>
                     <div className="flex flex-col py-3">
                       <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">

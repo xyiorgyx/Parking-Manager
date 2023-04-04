@@ -6,17 +6,18 @@ const resolvers = {
   Query: {
     user: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).populate("cars");
-        return userData
+        const userId = context.user._id;
+        return User.findById( userId ).populate("cars");
       }
       throw new AuthenticationError('not logged in!')
     },
     // users: async () => {
     //   return User.find().populate('cars');
     // },
-    // car: async (parent, { license_plate }) => {
-    //   return Car.findOne({ license_plate });
-    // },
+    car: async (parent, { carId }) => {
+      const car = await Car.findOne({ _id:carId });
+      return car;
+     },
      cars: async () => {
       return Car.find();
      },

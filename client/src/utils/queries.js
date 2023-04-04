@@ -40,6 +40,19 @@ export const QUERY_CARS = gql`
   }
 `;
 
+export const QUERY_CAR = gql`
+  query car ($carId: ID!){
+    car (carId:$carId){
+        _id
+        license_plate
+        make
+        model
+        color
+        owner
+    }
+  }
+`;
+
 export const QUERY_LOT = gql`
   query getLot {
     lot {
