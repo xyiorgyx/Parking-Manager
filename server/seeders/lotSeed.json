@@ -1,5 +1,8 @@
 [
     {
-        "lotName":"Pete's Private Lot"
+        "lotName":"7th Street Station",
+        "address":"270E E 7th St, Charlotte, NC 28202",
+        "parkingRate": 5,
+        "photo":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thebluebook.com%2FiProView%2F6977%2Frodgers-builders-inc%2Fgeneral-contractors%2Fconstruction-projects%2Fbank-of-america-7th-street-station-parking-deck-403714.html&psig=AOvVaw2OoniaJvSxbhbtz3ZT-KO6&ust=1680649652764000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNipmf_pjv4CFQAAAAAdAAAAABAD"
     }
 ]
