@@ -7,9 +7,9 @@ export default function Contact() {
         
       
         <section className="bg-gray-50 dark:bg-gray-900">
-          <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg dark:bg-gray-800 dark:border-gray-700">
+              <div className=" space-y-4 md:space-y-6 sm:p-8">
                 <div className="mb-12 max-w-[570px] lg:mb-0 text-center ">
                 
                   <h2
@@ -67,11 +67,11 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-              <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
+              <div className="w-full px-8">
                 <div >
                   <form className="space-y-4 md:space-y-6">
                     <h1></h1>
-                    <div className="m-6">
+                    <div className="">
                       <input
                         type="text"
                         placeholder="Your Name"
