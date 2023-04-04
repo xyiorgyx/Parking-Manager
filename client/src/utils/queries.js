@@ -1,54 +1,54 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-query user {
-  user {
-    _id
-    email
-    username
-    cars {
+  query user {
+    user {
       _id
-      color
-      license_plate
-      make
-      model
-      owner
-      spaces {
+      email
+      username
+      cars {
         _id
-        occupied
-        parkingLot
-        spaceName
+        color
+        license_plate
+        make
+        model
+        owner
+        spaces {
+          _id
+          occupied
+          parkingLot
+          spaceName
+        }
       }
+      name
+      paid
+      phoneNumber
     }
-    name
-    paid
-    phoneNumber
   }
-}
 `;
 
 export const QUERY_CARS = gql`
   query cars {
     car {
-        _id
-        license_plate
-        make
-        model
-        color
-        owner
+      _id
+      license_plate
+      make
+      model
+      color
+      owner
     }
   }
 `;
 
 export const QUERY_CAR = gql`
-  query car ($carId: ID!){
-    car (carId:$carId){
-        _id
-        license_plate
-        make
-        model
-        color
-        owner
+  query car($carId: ID!) {
+    car(carId: $carId) {
+      _id
+      license_plate
+      make
+      model
+      color
+      owner
     }
   }
 `;
@@ -56,47 +56,63 @@ export const QUERY_CAR = gql`
 export const QUERY_LOT = gql`
   query getLot {
     lot {
-        _id
-        lotName
-        address
-        parkingRate
-        photo
-        }
-        space{
-            _id
-            spaceName
-        }
+      _id
+      lotName
+      address
+      parkingRate
+      photo
     }
+    space {
+      _id
+      spaceName
+    }
+  }
 `;
 
 export const QUERY_ME = gql`
   query me {
     me {
       _id
-      username
       email
-      password
+      username
+      cars {
+        _id
+        color
+        license_plate
+        make
+        model
+        owner
+        spaces {
+          _id
+          occupied
+          parkingLot
+          spaceName
+        }
+      }
+      name
+      paid
+      phoneNumber
     }
   }
 `;
 
 export const QUERY_USERS = gql`
-query users{
-  users {
-    _id
-    password
-    name
-    username
-    phoneNumber
-    paid
-    email
-    cars {
+  query users {
+    users {
       _id
-      license_plate
-      make
-      model
-      color
+      password
+      name
+      username
+      phoneNumber
+      paid
+      email
+      cars {
+        _id
+        license_plate
+        make
+        model
+        color
+      }
     }
   }
-}
-`
+`;

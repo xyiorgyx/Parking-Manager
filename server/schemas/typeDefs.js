@@ -46,7 +46,8 @@ type Auth {
 
 type Query {
     #users:[User]
-    user:User
+    me: User
+    user(userId:ID!):User
     car(carId:ID!):Car
     cars: [Car]
     lot: [Lot]

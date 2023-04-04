@@ -4,34 +4,45 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const userId = context.user._id;
-        return User.findById( userId ).populate("cars");
-      }
-      throw new AuthenticationError('not logged in!')
+    user: async (parent, { userId }, context) => {
+      return User.findById(userId).populate("cars");
     },
-    // users: async () => {
-    //   return User.find().populate('cars');
-    // },
+    me: async (_, __, { user }) => {
+      if (user) {
+        console.log("Did you find a user?")
+        return User.findById(user._id).populate("cars");
+      }
+    },
+    //users: async () => {
+    //return User.find().populate('cars');
+    //},
     car: async (parent, { carId }) => {
-      const car = await Car.findOne({ _id:carId });
+      const car = await Car.findOne({ _id: carId });
       return car;
-     },
-     cars: async () => {
+    },
+    cars: async () => {
       return Car.find();
-     },
+    },
     lot: async () => {
       return Lot.find().populate("spaces");
     },
     spaces: async () => {
-      return Space.find().populate('spaceName');
+      return Space.find().populate("spaceName");
     },
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (
+      parent,
+      { username, email, password, phoneNumber, name }
+    ) => {
+      const user = await User.create({
+        username,
+        email,
+        password,
+        phoneNumber,
+        name,
+      });
       const token = signToken(user);
       return { token, user };
     },
@@ -55,7 +66,9 @@ const resolvers = {
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
       throw new AuthenticationError("Not logged in");
     },
@@ -72,20 +85,22 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addUserCar: async (parent, { license_plate, make, model, color,owner }, context) => {
+    addUserCar: async (
+      parent,
+      { license_plate, make, model, color, owner },
+      context
+    ) => {
       if (context.user) {
         const car = await Car.create({
           license_plate,
           make,
           model,
           color,
-          owner
-        
+          owner,
         });
-        await User.findByIdAndUpdate(
-          context.user._id,
-          { $addToSet: { cars: car._id } }
-        );
+        await User.findByIdAndUpdate(context.user._id, {
+          $addToSet: { cars: car._id },
+        });
         return car;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -111,7 +126,8 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addCarSpace: async (parent, { carId, spaceId, spaceName, parkingLot }) => {// context
+    addCarSpace: async (parent, { carId, spaceId, spaceName, parkingLot }) => {
+      // context
       // if (context.user) {
       return await Car.findOneAndUpdate(
         { _id: carId },
@@ -125,7 +141,8 @@ const resolvers = {
     },
     //throw new AuthenticationError("You need to be logged in!");
 
-    deleteCarSpace: async (parent, { carId, spaceId }) => { //context
+    deleteCarSpace: async (parent, { carId, spaceId }) => {
+      //context
       //if (context.user) {
       return await Car.findOneAndUpdate(
         { _id: carId },
@@ -154,9 +171,8 @@ const resolvers = {
         );
       }
       throw new AuthenticationError("Not logged in");
-    }
-  }
-}
-
+    },
+  },
+};
 
 module.exports = resolvers;
