@@ -8,18 +8,12 @@ import { Link } from 'react-router-dom';
 
 const  UserProfilePage = () => {
 
+  const { loading, data } = useQuery(QUERY_ME);
 
-  
-  const { username: userParam } = useParams();
-
-  const { loading, data } = useQuery(QUERY_USER, {
-   variables: {username: userParam},
-  });
-
-  const userData = data?.user ||  {};
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  const userData = data?.me ||  {};
+  /*if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
-  }
+  }*/
 
  if (loading) return <p>Loading...</p>;
 
@@ -37,7 +31,7 @@ const  UserProfilePage = () => {
 
 
 
-console.log(QUERY_CARS, userData);
+console.log(userData);
 
 
   return (
@@ -98,31 +92,32 @@ console.log(QUERY_CARS, userData);
                   </dl>
                 </div>
                 <h2 className="text-center text-white p-6">Vehicle Info</h2>
-                <div className=" w-full bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
+                {userData.cars.map(car => (
+                <div key={car._id} className=" w-full bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
           
                   <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                     <div className="flex flex-col pb-3">
                       <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Vehicle Make
                       </dt>
-                      <dd className="text-lg font-semibold">{userData.make}</dd>
+                      <dd className="text-lg font-semibold">{car.make}</dd>
                     </div>
                     <div className="flex flex-col py-3">
                       <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         Vehicle Model
                       </dt>
-                      <dd className="text-lg font-semibold">{userData.model}</dd>
+                      <dd className="text-lg font-semibold">{car.model}</dd>
                     </div>
                     <div className="flex flex-col pt-3">
                       <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                         License Plate
                       </dt>
                       <dd className="text-lg font-semibold">
-                        {userData.licence_plate}
+                        {car.license_plate}
                       </dd>
                     </div>
                   </dl>
-                </div>
+                </div>))}
               </section>
               <div></div>
             </div>

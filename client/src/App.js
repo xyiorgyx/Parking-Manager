@@ -60,16 +60,12 @@ function App() {
                 path="/signup" 
                 element={<Signup />}
               />
-              <Route 
-                path="/me" 
-                element={<Profile />}
-              />
                 <Route 
                 path="/carForm" 
                 element={<CarForm/>}
               />
               <Route 
-                path="/profiles/:profileId"
+                path="/me"
                 element={<Profile />}
               />
                 <Route 

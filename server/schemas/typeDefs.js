@@ -46,8 +46,9 @@ type Auth {
 
 type Query {
     #users:[User]
-    user:User
-    car(license_plate:String!):Car
+    me: User
+    user(userId:ID!):User
+    car(carId:ID!):Car
     cars: [Car]
     lot: [Lot]
     spaces: [Space]

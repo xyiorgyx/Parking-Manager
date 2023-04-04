@@ -1,24 +1,40 @@
 import React, { useState } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
+import { QUERY_CARS } from "../../utils/queries";
 import Auth from "../../utils/Auth";
+import { QUERY_ME } from "../../utils/queries";
 
-const CarForm = (props) => {
+const CarForm = () => {
   const [formState, setFormState] = useState({
     license_plate: "",
     make: "",
     model: "",
     color: "",
-    owner: Auth.getProfile().data.username
+    owner: Auth.getProfile().data.username,
   });
-  const [addUserCar, { error,data }] = useMutation(ADD_USER_CAR); 
- 
+  const [addUserCar, { error, date }] = useMutation(ADD_USER_CAR, {
+    update(cache, { data: { addUserCar } }) {
+      try {
+        const { me } = cache.readQuery({
+          query: QUERY_ME,
+        });
+        console.log({ me });
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: { me: { cars: [...me.cars, addUserCar] } },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormState({ ...formState, [name]: value });
-  
   };
 
   const handleFormSubmit = async (event) => {
@@ -27,9 +43,8 @@ const CarForm = (props) => {
     try {
       const { data } = await addUserCar({
         variables: {
-          ...formState
-        }
-        
+          ...formState,
+        },
       });
     } catch (e) {
       console.error(e);
@@ -39,7 +54,7 @@ const CarForm = (props) => {
       make: "",
       model: "",
       color: "",
-      owner: Auth.getProfile().data.username
+      owner: Auth.getProfile().data.username,
     });
   };
   console.log(formState);
@@ -127,6 +142,6 @@ const CarForm = (props) => {
       </main>
     </>
   );
-}
+};
 
 export default CarForm;

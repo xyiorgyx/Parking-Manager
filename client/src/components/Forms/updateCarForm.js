@@ -1,12 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import React, { useState } from "react";
+//import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { UPDATE_USER_CAR } from "../../utils/mutations";
+import { QUERY_CAR} from "../../utils/queries"
+import Auth from "../../utils/Auth";
 
-import { UPDATE_USER_CAR } from "../../utils/actions";
-import { QUERY_CARS } from '../utils/queries';
+const UpdateCar = () => {
 
-function UpdateCar() {
+    function carData ({initialCarData}){
 
+    const { initialCarData } = cache.readQuery({query:QUERY_CAR});
+        
+    const [carState, setCarState] = useState({ initialCarData });
+
+    const [updateUserCar, { error,data }] = useMutation(UPDATE_USER_CAR),
+    { update cache, { data: { updateUserCar} }
+}; 
+
+    const handleChange = (event) => {
+        const{name, value } = event.target;
+        setCarState({
+            ...carState, [name]:value
+        })
+    };
+
+    const handleFormSubmit = async(event)=>
+    {
+        event.preventDefault();
+        try {
+            const {data} = await updateUserCar({
+                variables: {
+                    ...carState
+                }
+            });
+        } catch (e) {
+            console.error(e);
+          }
+          setCarState({
+            license_plate: "",
+            make: "",
+            model: "",
+            color: "",
+            owner: Auth.getProfile().data.username
+          });
+        }
+
+    }
+    }
+   
 
 return (
     <>

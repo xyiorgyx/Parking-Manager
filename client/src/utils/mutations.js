@@ -93,3 +93,27 @@ export const VACATE_SPACE = gql`
     }
   }
 `;
+
+export const UPDATE_USER_CAR =   
+`mutation UpdateUserCar(
+  $license_plate: String
+  $make: String
+  $model: String
+  $color: String
+  $owner: String
+) {
+  UpdateUserCar(
+    license_plate: $license_plate
+    make: $make
+    model: $model
+    color: $color
+    owner: $owner
+  ) {
+    license_plate
+    make
+    model
+    color
+    owner
+  }
+}
+`;
