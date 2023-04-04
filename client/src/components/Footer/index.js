@@ -1,13 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
-function Footer(){
-    return (
-        <footer className='box-content h-64 w-full border-spacing-2 border-red-700 p-4'>
+const Footer = () => {
+  return (
+    <footer className="bg-gray-700 text-white py-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <p>&copy; 2023 Parking Lot Manager</p>
+        <ul className="flex m-4">
+         
+          <li><Link to="/contactUs">Contact Us</Link></li>
+        </ul>
+      </div>
+    </footer>
+  );
+};
 
-
-     
-        </footer>
-    )
-}
-
-export default Footer
+export default Footer;
