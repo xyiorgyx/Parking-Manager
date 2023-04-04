@@ -40,7 +40,7 @@ console.log(userData);
       <div>
       {userData ? (
         <div className="">
-          <div className="container  mx-auto  lg:px-40">
+          <div className="container p-3 mx-auto flex flex-col   lg:px-40">
             <div className="">
               <h1 className=" font-bold text-center text-white uppercase ">
                 Welcome {userData.name}!
@@ -96,11 +96,11 @@ console.log(userData);
           )}
         </div>
         </h2>
-                <section className="flex flex-row ">
+                <section className="flex flex-row">
                 {userData.cars.map(car => (
-                <div key={car._id} className="  bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
+                <div key={car._id} className="  bg-white mx-auto  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700  text-center">
           
-                  <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+                  <dl className="max-w-md  text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                     <div className="flex flex-col pb-3">
                       <dt className="mb-1 px-10 text-gray-500 md:text-lg dark:text-gray-400">
                         Vehicle Make
