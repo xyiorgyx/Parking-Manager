@@ -16,8 +16,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
 import Contact from './components/Forms/Contact'
-import Lotcards from './components/LotCards'
-
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -45,44 +43,33 @@ function App() {
       <Router>
         <div>
           <Header />
-          <div className="">
-            
+
             <Routes>
-              <Route 
-                path="/" 
+              <Route
+                path="/"
                 element={<Home />}
               />
-              <Route 
-                path="/login" 
+              <Route
+                path="/login"
                 element={<Login />}
               />
-              <Route 
-                path="/signup" 
+              <Route
+                path="/signup"
                 element={<Signup />}
               />
-              <Route 
-                path="/me" 
+              <Route
+                path="/carForm"
+                element={<CarForm />}
+              />
+              <Route
+                path="/me"
                 element={<Profile />}
               />
-                <Route 
-                path="/carForm" 
-                element={<CarForm/>}
-              />
-              <Route 
-                path="/profiles/:profileId"
-                element={<Profile />}
-              />
-                <Route 
-                path="/contactUs" 
+              <Route
+                path="/contactUs"
                 element={<Contact />}
               />
-              
-                <Route 
-                path="/lotcards" 
-                element={<Lotcards />}
-              />
-              
-            </Routes> 
+
 
           </div>
           <Footer />
@@ -93,3 +80,5 @@ function App() {
 }
 
 export default App;
+
+//test
