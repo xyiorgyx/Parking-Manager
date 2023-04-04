@@ -1,21 +1,38 @@
-import React from "react";
+import {React,useState} from "react";
 import Auth from "../utils/Auth";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME, QUERY_CARS } from "../utils/queries";
 import { Navigate, useParams } from "react-router-dom";
-
+import { useMutation } from "@apollo/client";
 import { Link } from 'react-router-dom';
+import { DELETE_USER_CAR } from "../utils/mutations";
 
 const  UserProfilePage = () => {
 
   const { loading, data } = useQuery(QUERY_ME);
-
+  
   const userData = data?.me ||  {};
+
+  
+const [deleteUserCar, { error }] = useMutation(DELETE_USER_CAR, {
+  update(cache, { data: { deleteUserCar } }) {
+    try {
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: deleteUserCar },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  },
+});
+
   /*if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }*/
-
+ 
  if (loading) return <p>Loading...</p>;
+
 
  
  if (!userData?.username) {
@@ -26,6 +43,17 @@ const  UserProfilePage = () => {
     </h4>
   );
 };
+
+const handleDeleteCar =async (carId) => {
+  try{
+    const {data} = await deleteUserCar({
+      variables: { carId },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+  
+}
 
 
 
@@ -44,6 +72,20 @@ console.log(userData);
             <div className="">
               <h1 className=" font-bold text-center text-white uppercase ">
                 Welcome {userData.name}!
+                {/* <div className='p-2'>
+          {Auth.loggedIn() ? (
+              <button className="btn border p-2 bg-blue-500 btn-lg btn-light  text-sm font-bold text-center  uppercase text-white m-2 ">
+                <Link to="/updateInfo"> Update Info</Link>
+              </button>
+          ) : (
+            <div></div>
+          )}
+        </div> */}
+              </h1>
+              <section className="p-6">
+            
+                {/* User Infomation */}
+                <h1 className="text-center p-2 text-blue-500 font-bold uppercase">Basic Info 
                 <div className='p-2'>
           {Auth.loggedIn() ? (
               <button className="btn border p-2 bg-blue-500 btn-lg btn-light  text-sm font-bold text-center  uppercase text-white m-2 ">
@@ -53,31 +95,27 @@ console.log(userData);
             <div></div>
           )}
         </div>
-              </h1>
-              <section className="p-6">
-            
-                {/* User Infomation */}
-                <h1 className="text-center p-2 text-blue-500 font-bold uppercase">Basic Info</h1>
+        </h1>
                 <div className=" w-full bg-white  mx-auto rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 text-center">
                   
                   <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                     <div className="flex flex-col pb-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-white">
                         Email address
                       </dt>
-                      <dd className="text-lg font-semibold">{userData.email}</dd>
+                      <dd className="text-lg dark:text-gray-400 font-semibold">{userData.email}</dd>
                     </div>
                     <div className="flex flex-col py-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-white">
                         User Name
                       </dt>
-                      <dd className="text-lg font-semibold">{userData.username}</dd>
+                      <dd className="text-lg dark:text-gray-400 font-semibold">{userData.username}</dd>
                     </div>
                     <div className="flex flex-col pt-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-white">
                         Phone number
                       </dt>
-                      <dd className="text-lg font-semibold">
+                      <dd className="text-lg dark:text-gray-400 font-semibold">
                         {userData.phoneNumber}
                       </dd>
                     </div>
@@ -102,25 +140,27 @@ console.log(userData);
           
                   <dl className="max-w-md  text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                     <div className="flex flex-col pb-3">
-                      <dt className="mb-1 px-10 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 px-10 text-gray-500 md:text-lg dark:text-white">
                         Vehicle Make
                       </dt>
-                      <dd className="text-lg font-semibold">{car.make}</dd>
+                      <dd className="text-lg  dark:text-gray-400 font-semibold">{car.make}</dd>
                     </div>
                     <div className="flex flex-col py-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-white">
                         Vehicle Model
                       </dt>
-                      <dd className="text-lg font-semibold">{car.model}</dd>
+                      <dd className="text-lg  dark:text-gray-400 font-semibold">{car.model}</dd>
                     </div>
                     <div className="flex flex-col pt-3">
-                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                      <dt className="mb-1 text-gray-500 md:text-lg dark:text-white">
                         License Plate
                       </dt>
-                      <dd className="text-lg font-semibold">
+                      <dd className="text-lg  dark:text-gray-400 font-semibold">
                         {car.license_plate}
                       </dd>
                     </div>
+                    
+                    <button className="btn border p-2 bg-red-500 btn-lg btn-light  text-xs font-bold text-center rounded-lg  uppercase text-white m-2" onClick={() => handleDeleteCar(car._id)}>Delete</button>
                   </dl>
                 </div>))}
                 </section>

@@ -15,8 +15,9 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CarForm from './components/Forms/userCarForm';
-import Contact from './components/Forms/Contact'
+import Contact from './components/Forms/Contact';
 import Lotcards from './components/LotCards';
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -45,35 +46,40 @@ function App() {
         <div>
           <Header />
             <Routes>
-              <Route
-                path="/"
+              <Route 
+                path="/" 
                 element={<Home />}
               />
-              <Route
-                path="/login"
+              <Route 
+                path="/login" 
                 element={<Login />}
               />
-              <Route
-                path="/signup"
+              <Route 
+                path="/signup" 
                 element={<Signup />}
               />
-              <Route
-                path="/carForm"
-                element={<CarForm />}
-              />
-              <Route
-                path="/me"
+              <Route 
+                path="/me" 
                 element={<Profile />}
               />
-              <Route
-                path="/contactUs"
+                <Route 
+                path="/carForm" 
+                element={<CarForm/>}
+              />
+                <Route 
+                path="/contactUs" 
                 element={<Contact />}
               />
-              <Route
-                path="/lotcards"
+
+              
+                <Route 
+                path="/lotcards" 
                 element={<Lotcards />}
               />
-              </Routes>
+              
+            </Routes> 
+
+
           </div>
           <Footer />
       </Router>
@@ -81,4 +87,7 @@ function App() {
   );
 }
 
+
 export default App;
+
+
