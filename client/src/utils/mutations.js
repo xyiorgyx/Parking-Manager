@@ -94,8 +94,8 @@ export const VACATE_SPACE = gql`
   }
 `;
 
-export const UPDATE_USER_CAR =   
-`mutation UpdateUserCar(
+export const UPDATE_USER_CAR =
+  `mutation UpdateUserCar(
   $license_plate: String
   $make: String
   $model: String
@@ -116,4 +116,22 @@ export const UPDATE_USER_CAR =
     owner
   }
 }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $phoneNumber: String!
+    $name: String!
+  ) {
+    updateUser(
+      username: $username
+      email: $email
+      password: $password
+      phoneNumber: $phoneNumber
+      name: $name
+    ) 
+  }
 `;
