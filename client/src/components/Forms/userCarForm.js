@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
 //import { QUERY_CARS } from "../../utils/queries";
@@ -14,30 +14,13 @@ const CarForm = (props) => {
     color: "",
     owner: Auth.getProfile().data.username
   });
-  const [addUserCar, { error,data }] = useMutation(ADD_USER_CAR); /*, {
-    update(cache, { data: { addUserCar } }) {
-      try {
-        const cars = cache.readQuery({ query: QUERY_CARS});
-
-        cache.writeQuery({
-          query: QUERY_CARS,
-          data: { cars: [addUserCar, ...cars] },
-        });
-      } catch (err) {
-        console.error(err);
-      }
-
-      const { user } = cache.readQuery({ query: QUERY_USER });
-      cache.writeQuery({
-        query: QUERY_USER,
-        data: { user: { ...user, cars: [...user.cars, addUserCar] } },
-      });
-    },
-  });*/
+  const [addUserCar, { error,data }] = useMutation(ADD_USER_CAR); 
+ 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormState({ ...formState, [name]: value });
+  
   };
 
   const handleFormSubmit = async (event) => {
