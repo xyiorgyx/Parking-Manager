@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
-import { QUERY_USER } from "../../utils/queries";
+//import { QUERY_CARS } from "../../utils/queries";
+//import { QUERY_USER } from "../../utils/queries";
 import Auth from "../../utils/Auth";
 
-function CarForm() {
+const CarForm = (props) => {
   const [formState, setFormState] = useState({
     license_plate: "",
     make: "",
@@ -13,52 +14,56 @@ function CarForm() {
     color: "",
   });
 
-  const [addUserCar, { error }] = useMutation(ADD_USER_CAR, {
+  const [addUserCar, { error }] = useMutation(ADD_USER_CAR); /*, {
     update(cache, { data: { addUserCar } }) {
       try {
-        const { newCar } = cache.readQuery({
-          query: QUERY_USER,
-        });
-        cache.writeQuery({
-          query: QUERY_USER,
-          data: { user: { cars: [addUserCar, ...newCar] } },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
+        const cars = cache.readQuery({ query: QUERY_CARS});
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+        cache.writeQuery({
+          query: QUERY_CARS,
+          data: { cars: [addUserCar, ...cars] },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+
+      const { user } = cache.readQuery({ query: QUERY_USER });
+      cache.writeQuery({
+        query: QUERY_USER,
+        data: { user: { ...user, cars: [...user.cars, addUserCar] } },
+      });
+    },
+  });*/
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log('change');
+
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
     try {
       const { data } = await addUserCar({
         variables: {
           ...formState,
-          owner: Auth.getProfile(data.username),
-        },
+          owner: Auth.getProfile().data.username,
+        }
+       
       });
-
-      setFormState({
-        ...formState,
-        license_plate: "",
-        make: "",
-        model: "",
-        color: "",
-      });
-
-      window.location.replace("/me");
-    } catch (err) {
-      console.error(err);
+      //Auth.loggedIn(data.addUserCar.token);
+    } catch (e) {
+      console.error(e);
     }
+    setFormState({
+      license_plate: "",
+      make: "",
+      model: "",
+      color: "",
+    });
   };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({ ...formState, [name]: value });
-  };
-
+console.log(formState, Auth.getProfile().data.username);
   return (
     <div>
       {Auth.loggedIn() ? (
@@ -75,9 +80,10 @@ function CarForm() {
               </label>
               <input
                 value={formState.model}
-                name="carModel"
+                name="model"
                 onChange={handleChange}
                 type="text"
+                required=""
                 placeholder="Car Model"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               />
@@ -89,9 +95,10 @@ function CarForm() {
             </label>
             <input
               value={formState.make}
-              name="carMake"
+              name="make"
               onChange={handleChange}
               type="text"
+              required=""
               placeholder="Car Make"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
@@ -103,9 +110,10 @@ function CarForm() {
 
             <input
               value={formState.color}
-              name="carColor"
+              name="color"
               onChange={handleChange}
               type="text"
+              required=""
               placeholder="Car Color"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
@@ -116,9 +124,10 @@ function CarForm() {
             </label>
             <input
               value={formState.license_plate}
-              name="carLicense"
+              name="license_plate"
               onChange={handleChange}
               type="text"
+              required=""
               placeholder="Car License"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />

@@ -28,13 +28,14 @@ query user {
 `;
 
 export const QUERY_CARS = gql`
-  query getCars {
+  query cars {
     car {
         _id
         license_plate
         make
         model
         color
+        owner
     }
   }
 `;
