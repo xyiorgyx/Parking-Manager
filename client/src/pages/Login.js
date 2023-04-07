@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 
 import Auth from "../utils/Auth";
-
+import background from "../Images/background-dark.jpg"
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -41,9 +41,8 @@ const Login = (props) => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div style={{ backgroundImage: `url(${background})` }} className="flex flex-col content-center bg-gray-600 dark:bg-gray-600 px-6 py-8  items-center bg-cover bg-center h-screen">
+        <div className="flex w-100hv  bg-white rounded-lg shadow dark:shadow-white dark:border dark:border-white border-2 md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 items-center content-center">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
@@ -135,7 +134,6 @@ const Login = (props) => {
           </div>
         </div>
       </div>
-    </section>
   );
 };
 
