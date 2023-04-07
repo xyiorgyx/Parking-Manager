@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER_CAR } from "../../utils/mutations";
 import { QUERY_CARS } from "../../utils/queries";
 import Auth from "../../utils/Auth";
 import { QUERY_ME } from "../../utils/queries";
-
+import background from "../../Images/car_background.jpg"
+import texture from "../../Images/texture_1.jpg"
 const CarForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     license_plate: "",
     make: "",
@@ -56,22 +58,25 @@ const CarForm = () => {
       color: "",
       owner: Auth.getProfile().data.username,
     });
+    navigate('/me');
   };
   console.log(formState);
   return (
     <>
-      <main className="bg-gray-50 dark:bg-gray-900 p-6   ">
-      <h2 className="p-6 text-center text-xl text-blue-500 font-bold uppercase">Vehicle Information</h2>
+      <div style={{ backgroundImage: `url(${background})` }}  className="flex flex-col bg-gray-50 dark:bg-gray-900  h-screen bg-cover bg-center text-white content-center py-6">
+      
         <form
           onSubmit={handleFormSubmit}
           action="#"
-          className="p-6 max-w-lg rounded-lg flex flex-col  mx-auto md:h-screen lg:py-0"
+          className="flex w-full md:w-2/3 sm:w-full lg:w-2/5  flex-col p-3 rounded-lg bg-gray-800 dark:bg-gray-800 bg-white dark:shadow-white dark:border dark:border-white border-2 bg-cover bg-center bg-no-repeat text-center "
+          style={{ backgroundImage: `url(${texture})` }}
         >
-          <div className="bg-gray-200  ">
+          <h2 className="p-6 text-center text-xl text-blue-500 font-bold uppercase">Vehicle Information</h2>
+          <div className="flex place-content-center  w-full">
             {/* <h2 className="p-6 text-center">Vehicle Information</h2> */}
-            <div className=" border p-6 ">
+            <div className="flex-col place-content-center text-center w-full">
               <div className="">
-                <div className="w-full md:w-1/2 px-4 mb-2 md:mb-0">
+                <div className="">
                   <label className="block uppercase tracking-wide  text-xs font-bold mb-2">
                     Car Model
                   </label>
@@ -81,13 +86,13 @@ const CarForm = () => {
                     onChange={handleChange}
                     type="text"
                     placeholder="Car Model"
-                    className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    className="appearance-none block w-full   border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     required=""
                   />
                 </div>
               </div>
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3">
+              <div className="">
+                <label className="block uppercase tracking-wide  text-xs font-bold mb-3">
                   Car Make
                 </label>
                 <input
@@ -96,12 +101,12 @@ const CarForm = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="Car Make"
-                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full   border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   required=""
                 />
               </div>
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3">
+              <div className="">
+                <label className="block uppercase tracking-wide  text-xs font-bold mb-3">
                   Car Color
                 </label>
 
@@ -111,12 +116,12 @@ const CarForm = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="Car Color"
-                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full   border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   required=""
                 />
               </div>
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3">
+              <div className="">
+                <label className="block uppercase tracking-wide  text-xs font-bold mb-3">
                   License Number
                 </label>
                 <input
@@ -126,7 +131,7 @@ const CarForm = () => {
                   type="text"
                   placeholder="Car License"
                   required=""
-                  className="appearance-none block w-full  text-gray-700 border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full   border border-gray-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 />
               </div>
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
@@ -138,9 +143,15 @@ const CarForm = () => {
                 </button>
               </div>
             </div>
+            
           </div>
         </form>
-      </main>
+        <div className="h-400px invisible"></div>
+        <div className="h-400px invisible"></div>
+        <div className="h-400px invisible"></div>
+        <div className="h-400px invisible"></div>
+        <div className="h-400px invisible"></div>
+      </div>
     </>
   );
 };

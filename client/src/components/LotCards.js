@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { QUERY_LOT } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import ParkingLotSpots from './ParkingLotSpots'
-import seventhstreetlot from "./images/seventhstreetlot.png"
+import seventhstreetlot from "../Images/seventhstreetlot.png"
 
 export default function Lotcards() {
   const { loading, data } = useQuery(QUERY_LOT);
