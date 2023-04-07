@@ -64,7 +64,7 @@ const UserProfilePage = () => {
 
 
   return (
-    <div style={{ backgroundImage: `url(${background})` }} className="flex bg-cover bg-center bg-no-repeat place-content-center bg-gray-50 dark:bg-gray-900 p-6">
+    <div style={{ backgroundImage: `url(${background})` }} className="flex bg-cover bg-center bg-no-repeat place-content-center bg-gray-50 dark:bg-gray-900 p-6 h-fit ">
       {userData ? (
         <div className="w-full md:w-2/3 sm:w-full lg:w-2/5 space-y-4">
 
